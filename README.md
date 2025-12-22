@@ -55,7 +55,7 @@ npm start
 - **Framework**: Next.js 16
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS 4
-- **Fonts**: Geist Sans & Geist Mono
+- **Fonts**: System fonts (optimized for performance)
 
 ## Deploy on Vercel
 
