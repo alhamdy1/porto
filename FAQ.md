@@ -24,7 +24,7 @@ gh api /user/copilot/usage
 ```
 
 **Catatan Penting:**
-- GitHub Copilot Individual: Biasanya tidak memiliki limit panggilan yang hard-coded per bulan
+- GitHub Copilot Individual: Biasanya tidak memiliki limit panggilan yang hardcoded per bulan
 - GitHub Copilot Business: Administrator organisasi dapat melihat usage metrics
 - Jika Anda menggunakan preview features atau experimental models, limitnya mungkin berbeda
 
@@ -85,9 +85,11 @@ gh api /user/copilot/usage
 
 **1. Cloud Computing Gratis:**
 - **Google Colab**: GPU/TPU gratis dengan limitasi session
-- **Kaggle Notebooks**: 30 jam GPU per minggu gratis
+- **Kaggle Notebooks**: 30 jam GPU per minggu gratis (verifikasi limit terkini di website mereka)
 - **Lightning AI Studio**: GPU gratis untuk experimentation
 - **Gradient by Paperspace**: Free tier dengan GPU access
+
+> **Catatan**: Kuota dan limit dapat berubah sewaktu-waktu. Selalu cek dokumentasi resmi platform untuk informasi terkini.
 
 **2. Dataset Gratis:**
 - **Kaggle Datasets**: Ribuan dataset untuk berbagai use cases
@@ -158,4 +160,4 @@ Jika Anda memiliki pertanyaan lain tentang portfolio ini atau topik-topik di ata
 2. Contact melalui form di website
 3. Atau hubungi langsung via email
 
-**Diperbarui**: Desember 2024
+**Diperbarui**: 23 Desember 2024
