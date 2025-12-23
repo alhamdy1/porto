@@ -1,23 +1,32 @@
 # Portfolio Website
 
-A modern, responsive portfolio website built with Next.js 16, TypeScript, and Tailwind CSS.
+A modern, feature-rich portfolio website built with Next.js 16, TypeScript, and Tailwind CSS.
 
 ## Features
 
-- 🎨 Modern and clean design
-- 📱 Fully responsive layout
-- 🌙 Dark mode support
+- 🎨 Modern and clean design with smooth animations
+- 📱 Fully responsive layout with mobile navigation
+- 🌙 Dark mode support (automatic based on system preference)
 - ⚡ Fast and optimized with Next.js
-- 💅 Styled with Tailwind CSS
+- 💅 Styled with Tailwind CSS 4
 - 🔤 TypeScript for type safety
+- 📧 Interactive contact form
+- 💬 Testimonials section
+- 📝 Blog/Articles showcase
+- 🏆 Certifications and achievements section
+- 🔗 Social media integration
+- 📄 Resume/CV download button
 
 ## Sections
 
-- **Home/Hero** - Welcome section with introduction
+- **Home/Hero** - Welcome section with introduction and social links
 - **About** - Information about experience and background
-- **Skills** - Technical skills and expertise
-- **Projects** - Portfolio of featured projects
-- **Contact** - Contact information and social links
+- **Skills** - Technical skills and expertise organized by category
+- **Certifications** - Professional certifications and achievements
+- **Projects** - Portfolio of featured projects with GitHub and live demo links
+- **Testimonials** - Client reviews and recommendations
+- **Blog** - Latest articles and thought leadership
+- **Contact** - Interactive contact form and contact information
 
 ## Getting Started
 
@@ -42,6 +51,17 @@ You can customize the portfolio by editing:
 - `app/page.tsx` - Main content and sections
 - `app/layout.tsx` - Site metadata and layout
 - `app/globals.css` - Global styles and theme colors
+
+### Key Areas to Personalize:
+
+1. **Personal Information** - Update your name, bio, and professional title
+2. **Skills** - Add your technical skills and tools
+3. **Projects** - Add your projects with descriptions, tech stack, and links
+4. **Certifications** - List your certifications and achievements
+5. **Testimonials** - Add client testimonials and reviews
+6. **Blog Posts** - Add your latest articles or blog posts
+7. **Contact Information** - Update email, location, and social media links
+8. **Resume** - Add your resume PDF to the `/public` folder
 
 ## Build for Production
 

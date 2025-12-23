@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Portfolio - Full Stack Developer",
-  description: "Professional portfolio showcasing web development projects, skills, and experience in React, Next.js, and modern web technologies.",
+  title: "Portfolio - Full Stack Developer & Designer",
+  description: "Professional portfolio showcasing web development projects, skills, certifications, testimonials, and technical articles. Specialized in React, Next.js, TypeScript, and modern web technologies.",
 };
 
 export default function RootLayout({
