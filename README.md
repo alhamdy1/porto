@@ -82,3 +82,34 @@ npm start
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
 
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## FAQ
+
+For frequently asked questions about this portfolio, GitHub Copilot usage, AI training resources, and more, check out the [FAQ.md](./FAQ.md) file.
+
+Topics covered:
+- 🤖 How to check GitHub Copilot premium call quota
+- 📊 Portfolio assessment and improvement suggestions
+- 🌐 AI internet access capabilities
+- 🎓 Free resources for AI training
+
+## Portfolio Assessment
+
+**Current Score: 78/100**
+
+**Strengths:**
+- Modern design with Tailwind CSS
+- Responsive layout with mobile support
+- Dark mode support
+- Well-organized sections
+- Modern tech stack (Next.js 16, React 19, TypeScript)
+
+**Areas for Improvement:**
+- Replace placeholder content with real information
+- Implement contact form handler
+- Add SEO optimization
+- Include performance optimizations
+- Add animations and micro-interactions
+- Implement testing suite
+
+See [FAQ.md](./FAQ.md) for detailed recommendations.
