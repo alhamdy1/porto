@@ -187,12 +187,22 @@ class PSOKnapsack {
 
 // Convergence Chart Component
 function ConvergenceChart({ data }: { data: number[] }) {
-  const maxValue = Math.max(...data, 1);
-  const minValue = Math.min(...data, 0);
+  // Guard against empty data
+  if (data.length === 0) {
+    return (
+      <div className="w-full h-48 bg-slate-800 rounded-lg p-4 flex items-center justify-center">
+        <span className="text-slate-400">No data to display</span>
+      </div>
+    );
+  }
+  
+  const maxValue = Math.max(...data);
+  const minValue = Math.min(...data);
   const range = maxValue - minValue || 1;
+  const divisor = Math.max(data.length - 1, 1);
   
   const points = data.map((value, index) => {
-    const x = (index / (data.length - 1 || 1)) * 100;
+    const x = (index / divisor) * 100;
     const y = 100 - ((value - minValue) / range) * 100;
     return `${x},${y}`;
   }).join(' ');
@@ -250,6 +260,7 @@ export default function KnapsackPSOPage() {
   // Items state
   const [items, setItems] = useState<Item[]>(DEFAULT_ITEMS);
   const [newItem, setNewItem] = useState({ name: '', weight: '', value: '' });
+  const [nextItemId, setNextItemId] = useState(DEFAULT_ITEMS.length + 1);
   
   // Knapsack capacity
   const [capacity, setCapacity] = useState(5);
@@ -279,15 +290,16 @@ export default function KnapsackPSOPage() {
     if (!newItem.name || !newItem.weight || !newItem.value) return;
     
     const item: Item = {
-      id: Date.now(),
+      id: nextItemId,
       name: newItem.name,
       weight: parseFloat(newItem.weight),
       value: parseFloat(newItem.value),
     };
     
+    setNextItemId(prev => prev + 1);
     setItems(prev => [...prev, item]);
     setNewItem({ name: '', weight: '', value: '' });
-  }, [newItem]);
+  }, [newItem, nextItemId]);
   
   // Remove item
   const handleRemoveItem = useCallback((id: number) => {
@@ -349,8 +361,8 @@ export default function KnapsackPSOPage() {
           </p>
           <p className="text-slate-300">
             <strong>Particle Swarm Optimization (PSO)</strong> is a metaheuristic algorithm inspired by 
-            the social behavior of birds flocking or fish schooling. Particles &quot;fly&quot; through the solution 
-            space, guided by their own best-known position and the swarm&apos;s best-known position.
+            the social behavior of birds flocking or fish schooling. Particles &ldquo;fly&rdquo; through the solution 
+            space, guided by their own best-known position and the swarm&rsquo;s best-known position.
           </p>
         </div>
         
