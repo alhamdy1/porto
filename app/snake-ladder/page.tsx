@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Text, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
@@ -654,9 +654,11 @@ export default function SnakeLadderGame() {
                 className="bg-slate-700 rounded-xl overflow-hidden"
                 style={{ height: '600px' }}
               >
-                <Canvas shadows>
-                  <Scene currentPosition={position} mode={mode} />
-                </Canvas>
+                <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-white">Loading 3D Engine...</div>}>
+                  <Canvas shadows>
+                    <Scene currentPosition={position} mode={mode} />
+                  </Canvas>
+                </Suspense>
               </div>
             )}
           </div>
