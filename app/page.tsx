@@ -381,6 +381,35 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Project 4 - Snake & Ladder Game */}
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition group">
+              <div className="h-48 bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center relative overflow-hidden">
+                <span className="text-white text-6xl group-hover:scale-110 transition-transform">🎲</span>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  Snake & Ladder 3D Game
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  Interactive Snake & Ladder game with 3 modes: Classic 2D, 3D Rotatable Board, and First-Person View using WebGL/Three.js
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded-full text-sm">Three.js</span>
+                  <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded-full text-sm">WebGL</span>
+                  <span className="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded-full text-sm">React</span>
+                </div>
+                <div className="flex gap-3">
+                  <a href="/snake-ladder" className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline text-sm font-semibold">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Play Game
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
