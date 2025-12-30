@@ -15,8 +15,8 @@ const BOARD_DIMENSION = BOARD_SIZE * CELL_SIZE;
 const FP_SCALE = 3; // Scale factor for first person mode
 const FP_CELL_SIZE = CELL_SIZE * FP_SCALE;
 const FP_BOARD_DIMENSION = BOARD_SIZE * FP_CELL_SIZE;
-const WALL_HEIGHT = 0.8; // Height of walls between cells
-const OUTER_WALL_HEIGHT = 0.8; // Height of outer walls
+const WALL_HEIGHT = 4; // Height of row separator walls (zigzag pattern)
+const OUTER_WALL_HEIGHT = 4; // Height of outer walls (taller than player view)
 
 // Player colors
 const PLAYER_COLORS = ['#eab308', '#ef4444', '#22c55e', '#3b82f6']; // Yellow, Red, Green, Blue
@@ -415,31 +415,33 @@ function Snake3D({ start, end, scale = 1 }: { start: number; end: number; scale?
   );
 }
 
-// Ladder 3D Component - Cleaner version
+// Ladder 3D Component - Height proportional to distance
+const LADDER_HEIGHT_RATIO = 0.3; // Ratio of horizontal distance to ladder height
+
 function Ladder3D({ start, end, scale = 1 }: { start: number; end: number; scale?: number }) {
   const startCoords = getPositionCoords(start, scale);
   const endCoords = getPositionCoords(end, scale);
   
   const dx = endCoords.x - startCoords.x;
   const dz = endCoords.z - startCoords.z;
-  const length = Math.sqrt(dx * dx + dz * dz);
+  const horizontalLength = Math.sqrt(dx * dx + dz * dz);
   const angle = Math.atan2(dx, dz);
   
-  // Calculate tilt angle for the ladder
-  const tiltAngle = 0.2; // Slight tilt
+  // Ladder height proportional to horizontal distance (not too tall)
+  const ladderHeight = horizontalLength * LADDER_HEIGHT_RATIO;
   
   // Calculate perpendicular direction for rail spacing
   const perpX = -Math.cos(angle) * 0.12 * scale;
   const perpZ = Math.sin(angle) * 0.12 * scale;
   
   const rungs = [];
-  const numRungs = Math.max(3, Math.floor(length / (0.6 * scale)));
+  const numRungs = Math.max(3, Math.floor(horizontalLength / (0.6 * scale)));
   
   for (let i = 1; i < numRungs; i++) {
     const t = i / numRungs;
     const x = startCoords.x + dx * t;
     const z = startCoords.z + dz * t;
-    const y = 0.1 * scale + t * 0.4 * scale;
+    const y = 0.1 * scale + t * ladderHeight;
     
     rungs.push(
       <mesh
@@ -453,11 +455,14 @@ function Ladder3D({ start, end, scale = 1 }: { start: number; end: number; scale
     );
   }
   
-  // Rail height calculation
-  const railLength = length * 1.05;
+  // Rail length calculation (diagonal length considering height)
+  const railLength = Math.sqrt(horizontalLength * horizontalLength + ladderHeight * ladderHeight) * 1.05;
   const railMidX = (startCoords.x + endCoords.x) / 2;
   const railMidZ = (startCoords.z + endCoords.z) / 2;
-  const railMidY = 0.3 * scale;
+  const railMidY = 0.1 * scale + ladderHeight / 2;
+  
+  // Calculate tilt angle based on height and distance
+  const tiltAngle = Math.atan2(ladderHeight, horizontalLength);
   
   return (
     <group>
@@ -543,7 +548,7 @@ function Board3D({
   );
 }
 
-// First Person Cell 3D Component with walls and upright number
+// First Person Cell 3D Component with walls only at row separators (zigzag pattern)
 function FPCell3D({ 
   position, 
   playerIndices,
@@ -583,14 +588,26 @@ function FPCell3D({
   const col = (position - 1) % BOARD_SIZE;
   const actualCol = row % 2 === 0 ? col : BOARD_SIZE - 1 - col;
   
-  // Determine which walls to show (between cells)
-  const showNorthWall = row < BOARD_SIZE - 1;
-  const showEastWall = actualCol < BOARD_SIZE - 1;
-  const showSouthWall = row > 0;
-  const showWestWall = actualCol > 0;
+  // Zigzag pattern wall logic:
+  // In snake and ladder, the path goes in a zigzag. Row separators are where the path turns.
+  // - For even rows (0, 2, 4...), path goes left to right, wall at right end (last column)
+  // - For odd rows (1, 3, 5...), path goes right to left, wall at left end (first column)
+  // We also need walls between rows (north walls when moving to next row)
   
-  const wallThickness = 0.1;
+  // Show wall at the end of each row (where zigzag turns)
+  const isEvenRow = row % 2 === 0;
+  const isLastColumn = actualCol === BOARD_SIZE - 1;
+  const isFirstColumn = actualCol === 0;
+  const showTurnWall = (isEvenRow && isLastColumn) || (!isEvenRow && isFirstColumn);
+  
+  // Show wall between rows at the turning point
+  const showRowSeparator = row < BOARD_SIZE - 1;
+  
+  const wallThickness = 0.15;
   const wallColor = '#374151';
+  
+  // Calculate wall position offset for side walls at zigzag turns
+  const sideWallOffset = isEvenRow ? FP_CELL_SIZE / 2 : -FP_CELL_SIZE / 2;
   
   return (
     <group position={[coords.x, 0, coords.z]}>
@@ -614,15 +631,17 @@ function FPCell3D({
         {position.toString()}
       </Text>
       
-      {/* Inner walls between cells */}
-      {showNorthWall && (
+      {/* Row separator walls (zigzag pattern) - only at turn points */}
+      {showTurnWall && showRowSeparator && (
         <mesh position={[0, WALL_HEIGHT / 2, FP_CELL_SIZE / 2]}>
           <boxGeometry args={[FP_CELL_SIZE, WALL_HEIGHT, wallThickness]} />
           <meshStandardMaterial color={wallColor} />
         </mesh>
       )}
-      {showEastWall && (
-        <mesh position={[FP_CELL_SIZE / 2, WALL_HEIGHT / 2, 0]}>
+      
+      {/* Side wall at zigzag turn - vertical wall where path turns */}
+      {showTurnWall && row < BOARD_SIZE - 1 && (
+        <mesh position={[sideWallOffset, WALL_HEIGHT / 2, 0]}>
           <boxGeometry args={[wallThickness, WALL_HEIGHT, FP_CELL_SIZE]} />
           <meshStandardMaterial color={wallColor} />
         </mesh>
@@ -740,7 +759,7 @@ function FPBoard3D({
   );
 }
 
-// First Person Camera Controller
+// First Person Camera Controller - starts at cell 1, player feels smaller
 function FirstPersonController({ 
   currentPosition, 
   enabled 
@@ -751,6 +770,10 @@ function FirstPersonController({
   const { camera } = useThree();
   const keysRef = useRef<Set<string>>(new Set());
   const rotationRef = useRef({ x: 0, y: 0 });
+  const initializedRef = useRef(false);
+  
+  // Player eye height (lower than wall height to feel inside the world)
+  const PLAYER_EYE_HEIGHT = 1.2; // Lower than WALL_HEIGHT (4) and OUTER_WALL_HEIGHT (4)
   
   useEffect(() => {
     if (!enabled) return;
@@ -782,12 +805,19 @@ function FirstPersonController({
     };
   }, [enabled]);
   
+  // Initialize camera position at cell 1 when first entering mode 3
   useEffect(() => {
-    if (enabled) {
-      const coords = getPositionCoords(currentPosition, FP_SCALE);
-      camera.position.set(coords.x, 1.5, coords.z);
+    if (enabled && !initializedRef.current) {
+      // Start at cell 1
+      const coords = getPositionCoords(1, FP_SCALE);
+      camera.position.set(coords.x, PLAYER_EYE_HEIGHT, coords.z);
+      rotationRef.current = { x: 0, y: 0 };
+      initializedRef.current = true;
     }
-  }, [currentPosition, camera, enabled]);
+    if (!enabled) {
+      initializedRef.current = false;
+    }
+  }, [camera, enabled]);
   
   /* eslint-disable react-hooks/immutability */
   useFrame(() => {
@@ -816,10 +846,10 @@ function FirstPersonController({
     }
     
     // Keep player within board bounds using clamp
-    const halfBoard = FP_BOARD_DIMENSION / 2 + 2;
+    const halfBoard = FP_BOARD_DIMENSION / 2 - 0.5;
     camera.position.clamp(
-      new THREE.Vector3(-halfBoard, 0.8, -halfBoard),
-      new THREE.Vector3(halfBoard, 5, halfBoard)
+      new THREE.Vector3(-halfBoard, PLAYER_EYE_HEIGHT, -halfBoard),
+      new THREE.Vector3(halfBoard, PLAYER_EYE_HEIGHT, halfBoard)
     );
     
     // Apply rotation
@@ -885,9 +915,11 @@ function Scene({
         <PerspectiveCamera makeDefault position={[8, 10, 8]} fov={60} />
       )}
       
-      {mode === 3 && (
-        <PerspectiveCamera makeDefault position={[0, 1.5, 0]} fov={75} />
-      )}
+      {mode === 3 && (() => {
+        // Start camera at cell 1 position
+        const cell1Coords = getPositionCoords(1, FP_SCALE);
+        return <PerspectiveCamera makeDefault position={[cell1Coords.x, 1.2, cell1Coords.z]} fov={75} />;
+      })()}
       
       {/* Ground plane */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.21, 0]}>
