@@ -495,6 +495,34 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Project 8 - arXiv Paper Analyzer */}
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition group">
+              <div className="h-48 bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center relative overflow-hidden">
+                <span className="text-white text-6xl group-hover:scale-110 transition-transform">📄</span>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  arXiv Paper Analyzer
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  Analyze academic papers from arXiv with keyword extraction, topic classification, reading complexity estimation, and automatic summarization
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="px-3 py-1 bg-rose-100 dark:bg-rose-900 text-rose-700 dark:text-rose-300 rounded-full text-sm">Research</span>
+                  <span className="px-3 py-1 bg-rose-100 dark:bg-rose-900 text-rose-700 dark:text-rose-300 rounded-full text-sm">NLP</span>
+                  <span className="px-3 py-1 bg-rose-100 dark:bg-rose-900 text-rose-700 dark:text-rose-300 rounded-full text-sm">Next.js</span>
+                </div>
+                <div className="flex gap-3">
+                  <a href="/arxiv-analyzer" className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline text-sm font-semibold">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Analyze Paper
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
