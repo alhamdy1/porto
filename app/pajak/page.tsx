@@ -120,24 +120,25 @@ function calculatePPN(amount: number, rate: number = 12): { ppnAmount: number; t
 // Tax Information Section
 function TaxInfoSection() {
   return (
-    <div className="bg-slate-700/50 rounded-xl p-6 mb-8">
-      <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-        📚 Informasi Perpajakan Indonesia
+    <div className="bg-emerald-900/30 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-emerald-500/20 shadow-xl shadow-emerald-500/5">
+      <h2 className="text-2xl font-bold text-emerald-100 mb-6 flex items-center gap-2">
+        <span className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">📚</span>
+        Informasi Perpajakan Indonesia
       </h2>
       
       <div className="grid md:grid-cols-2 gap-6">
         {/* PPh 21 Info */}
-        <div className="bg-slate-800 rounded-lg p-5">
-          <h3 className="text-lg font-semibold text-blue-400 mb-3 flex items-center gap-2">
+        <div className="bg-emerald-950/50 rounded-xl p-5 border border-emerald-500/20">
+          <h3 className="text-lg font-semibold text-sky-300 mb-3 flex items-center gap-2">
             💼 PPh 21 (Pajak Penghasilan)
           </h3>
-          <p className="text-slate-300 text-sm mb-3">
+          <p className="text-emerald-200/80 text-sm mb-3">
             Pajak yang dikenakan atas penghasilan berupa gaji, upah, honorarium, tunjangan, 
             dan pembayaran lain yang diterima oleh Wajib Pajak orang pribadi dalam negeri.
           </p>
-          <div className="bg-slate-700 rounded-lg p-3">
-            <h4 className="text-sm font-semibold text-white mb-2">Tarif PPh 21 (2024):</h4>
-            <ul className="text-xs text-slate-300 space-y-1">
+          <div className="bg-emerald-900/50 rounded-lg p-3 border border-emerald-500/10">
+            <h4 className="text-sm font-semibold text-emerald-100 mb-2">Tarif PPh 21 (2024):</h4>
+            <ul className="text-xs text-emerald-200/70 space-y-1">
               <li>• 5% untuk PKP s.d Rp60 juta</li>
               <li>• 15% untuk PKP Rp60 juta - Rp250 juta</li>
               <li>• 25% untuk PKP Rp250 juta - Rp500 juta</li>
@@ -148,17 +149,17 @@ function TaxInfoSection() {
         </div>
         
         {/* PPN Info */}
-        <div className="bg-slate-800 rounded-lg p-5">
-          <h3 className="text-lg font-semibold text-green-400 mb-3 flex items-center gap-2">
+        <div className="bg-emerald-950/50 rounded-xl p-5 border border-emerald-500/20">
+          <h3 className="text-lg font-semibold text-teal-300 mb-3 flex items-center gap-2">
             🛒 PPN (Pajak Pertambahan Nilai)
           </h3>
-          <p className="text-slate-300 text-sm mb-3">
+          <p className="text-emerald-200/80 text-sm mb-3">
             Pajak yang dikenakan atas setiap pertambahan nilai dari barang atau jasa 
             dalam peredarannya dari produsen ke konsumen.
           </p>
-          <div className="bg-slate-700 rounded-lg p-3">
-            <h4 className="text-sm font-semibold text-white mb-2">Tarif PPN:</h4>
-            <ul className="text-xs text-slate-300 space-y-1">
+          <div className="bg-emerald-900/50 rounded-lg p-3 border border-emerald-500/10">
+            <h4 className="text-sm font-semibold text-emerald-100 mb-2">Tarif PPN:</h4>
+            <ul className="text-xs text-emerald-200/70 space-y-1">
               <li>• 12% (tarif umum sejak 1 Januari 2025)</li>
               <li>• 11% (tarif sebelumnya, April 2022 - Desember 2024)</li>
               <li>• 0% untuk ekspor BKP/JKP</li>
@@ -167,17 +168,17 @@ function TaxInfoSection() {
         </div>
         
         {/* PTKP Info */}
-        <div className="bg-slate-800 rounded-lg p-5">
-          <h3 className="text-lg font-semibold text-purple-400 mb-3 flex items-center gap-2">
+        <div className="bg-emerald-950/50 rounded-xl p-5 border border-emerald-500/20">
+          <h3 className="text-lg font-semibold text-violet-300 mb-3 flex items-center gap-2">
             👤 PTKP (Penghasilan Tidak Kena Pajak)
           </h3>
-          <p className="text-slate-300 text-sm mb-3">
+          <p className="text-emerald-200/80 text-sm mb-3">
             Jumlah penghasilan yang tidak dikenakan pajak karena dianggap untuk 
             memenuhi kebutuhan dasar wajib pajak dan tanggungannya.
           </p>
-          <div className="bg-slate-700 rounded-lg p-3">
-            <h4 className="text-sm font-semibold text-white mb-2">PTKP 2024:</h4>
-            <ul className="text-xs text-slate-300 space-y-1">
+          <div className="bg-emerald-900/50 rounded-lg p-3 border border-emerald-500/10">
+            <h4 className="text-sm font-semibold text-emerald-100 mb-2">PTKP 2024:</h4>
+            <ul className="text-xs text-emerald-200/70 space-y-1">
               <li>• TK/0: Rp54.000.000/tahun</li>
               <li>• K/0: Rp58.500.000/tahun</li>
               <li>• Tambahan tanggungan: Rp4.500.000/orang</li>
@@ -187,17 +188,17 @@ function TaxInfoSection() {
         </div>
         
         {/* PPh Final Info */}
-        <div className="bg-slate-800 rounded-lg p-5">
-          <h3 className="text-lg font-semibold text-orange-400 mb-3 flex items-center gap-2">
+        <div className="bg-emerald-950/50 rounded-xl p-5 border border-emerald-500/20">
+          <h3 className="text-lg font-semibold text-amber-300 mb-3 flex items-center gap-2">
             🏢 PPh Final UMKM
           </h3>
-          <p className="text-slate-300 text-sm mb-3">
+          <p className="text-emerald-200/80 text-sm mb-3">
             Pajak penghasilan yang bersifat final untuk usaha mikro, kecil, dan menengah 
             dengan peredaran bruto tertentu.
           </p>
-          <div className="bg-slate-700 rounded-lg p-3">
-            <h4 className="text-sm font-semibold text-white mb-2">Ketentuan:</h4>
-            <ul className="text-xs text-slate-300 space-y-1">
+          <div className="bg-emerald-900/50 rounded-lg p-3 border border-emerald-500/10">
+            <h4 className="text-sm font-semibold text-emerald-100 mb-2">Ketentuan:</h4>
+            <ul className="text-xs text-emerald-200/70 space-y-1">
               <li>• Tarif: 0,5% dari omzet</li>
               <li>• Untuk omzet s.d Rp4,8 miliar/tahun</li>
               <li>• Berlaku untuk WP OP & Badan</li>
@@ -208,26 +209,26 @@ function TaxInfoSection() {
       </div>
       
       {/* Important Dates */}
-      <div className="mt-6 bg-slate-800 rounded-lg p-5">
-        <h3 className="text-lg font-semibold text-yellow-400 mb-3 flex items-center gap-2">
+      <div className="mt-6 bg-emerald-950/50 rounded-xl p-5 border border-emerald-500/20">
+        <h3 className="text-lg font-semibold text-amber-300 mb-3 flex items-center gap-2">
           📅 Batas Waktu Pelaporan Pajak
         </h3>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-slate-700 rounded-lg p-3 text-center">
-            <p className="text-white font-semibold">SPT PPh 21</p>
-            <p className="text-slate-300 text-sm">Tanggal 20 bulan berikutnya</p>
+          <div className="bg-emerald-900/50 rounded-lg p-3 text-center border border-emerald-500/10">
+            <p className="text-emerald-100 font-semibold">SPT PPh 21</p>
+            <p className="text-emerald-200/70 text-sm">Tanggal 20 bulan berikutnya</p>
           </div>
-          <div className="bg-slate-700 rounded-lg p-3 text-center">
-            <p className="text-white font-semibold">SPT Tahunan OP</p>
-            <p className="text-slate-300 text-sm">31 Maret</p>
+          <div className="bg-emerald-900/50 rounded-lg p-3 text-center border border-emerald-500/10">
+            <p className="text-emerald-100 font-semibold">SPT Tahunan OP</p>
+            <p className="text-emerald-200/70 text-sm">31 Maret</p>
           </div>
-          <div className="bg-slate-700 rounded-lg p-3 text-center">
-            <p className="text-white font-semibold">SPT Tahunan Badan</p>
-            <p className="text-slate-300 text-sm">30 April</p>
+          <div className="bg-emerald-900/50 rounded-lg p-3 text-center border border-emerald-500/10">
+            <p className="text-emerald-100 font-semibold">SPT Tahunan Badan</p>
+            <p className="text-emerald-200/70 text-sm">30 April</p>
           </div>
-          <div className="bg-slate-700 rounded-lg p-3 text-center">
-            <p className="text-white font-semibold">SPT Masa PPN</p>
-            <p className="text-slate-300 text-sm">Akhir bulan berikutnya</p>
+          <div className="bg-emerald-900/50 rounded-lg p-3 text-center border border-emerald-500/10">
+            <p className="text-emerald-100 font-semibold">SPT Masa PPN</p>
+            <p className="text-emerald-200/70 text-sm">Akhir bulan berikutnya</p>
           </div>
         </div>
       </div>
@@ -689,60 +690,70 @@ export default function PajakCalculatorPage() {
   const [activeTab, setActiveTab] = useState<'pph21' | 'ppn' | 'umkm'>('pph21');
   
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-950 via-teal-950 to-cyan-950">
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
+      </div>
+      
       {/* Header */}
-      <header className="bg-slate-800/80 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
+      <header className="bg-emerald-900/40 backdrop-blur-md border-b border-emerald-500/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-white hover:text-blue-400 transition flex items-center gap-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <Link href="/" className="text-emerald-100 hover:text-emerald-300 transition flex items-center gap-2 group">
+            <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Portfolio
           </Link>
-          <h1 className="text-xl md:text-2xl font-bold text-white">🧾 Kalkulator Pajak Indonesia</h1>
+          <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-emerald-200 to-teal-200 bg-clip-text text-transparent flex items-center gap-2">
+            <span className="text-2xl">🧾</span> Kalkulator Pajak Indonesia
+          </h1>
           <div className="w-[140px]" /> {/* Spacer for centering */}
         </div>
       </header>
       
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-6">
+      <main className="max-w-7xl mx-auto px-4 py-6 relative z-10">
         {/* Tax Information Section */}
         <TaxInfoSection />
         
         {/* Calculator Section */}
-        <div className="bg-slate-700/50 rounded-xl p-6">
-          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-            🧮 Kalkulator Pajak
+        <div className="bg-emerald-900/30 backdrop-blur-sm rounded-2xl p-6 border border-emerald-500/20 shadow-xl shadow-emerald-500/5">
+          <h2 className="text-2xl font-bold text-emerald-100 mb-6 flex items-center gap-2">
+            <span className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">🧮</span>
+            Kalkulator Pajak
           </h2>
           
           {/* Tab Navigation */}
           <div className="flex flex-wrap gap-2 mb-6">
             <button
               onClick={() => setActiveTab('pph21')}
-              className={`px-6 py-3 rounded-lg font-semibold transition ${
+              className={`px-6 py-3 rounded-xl font-semibold transition ${
                 activeTab === 'pph21'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  ? 'bg-gradient-to-r from-sky-500 to-blue-500 text-white shadow-lg shadow-sky-500/25'
+                  : 'bg-emerald-900/40 text-emerald-200 hover:bg-emerald-800/50 border border-emerald-500/20'
               }`}
             >
               💼 PPh 21
             </button>
             <button
               onClick={() => setActiveTab('ppn')}
-              className={`px-6 py-3 rounded-lg font-semibold transition ${
+              className={`px-6 py-3 rounded-xl font-semibold transition ${
                 activeTab === 'ppn'
-                  ? 'bg-green-600 text-white'
-                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25'
+                  : 'bg-emerald-900/40 text-emerald-200 hover:bg-emerald-800/50 border border-emerald-500/20'
               }`}
             >
               🛒 PPN
             </button>
             <button
               onClick={() => setActiveTab('umkm')}
-              className={`px-6 py-3 rounded-lg font-semibold transition ${
+              className={`px-6 py-3 rounded-xl font-semibold transition ${
                 activeTab === 'umkm'
-                  ? 'bg-orange-600 text-white'
-                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25'
+                  : 'bg-emerald-900/40 text-emerald-200 hover:bg-emerald-800/50 border border-emerald-500/20'
               }`}
             >
               🏢 PPh Final UMKM
@@ -756,8 +767,8 @@ export default function PajakCalculatorPage() {
         </div>
         
         {/* Disclaimer */}
-        <div className="mt-6 bg-yellow-900/20 border border-yellow-500/50 rounded-xl p-4">
-          <h3 className="text-yellow-400 font-semibold mb-2 flex items-center gap-2">
+        <div className="mt-6 bg-amber-500/10 border border-amber-400/30 rounded-2xl p-4 backdrop-blur-sm">
+          <h3 className="text-amber-300 font-semibold mb-2 flex items-center gap-2">
             ⚠️ Disclaimer
           </h3>
           <p className="text-yellow-200/80 text-sm">
@@ -768,54 +779,55 @@ export default function PajakCalculatorPage() {
         </div>
         
         {/* Useful Links */}
-        <div className="mt-6 bg-slate-700/50 rounded-xl p-6">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            🔗 Link Berguna
+        <div className="mt-6 bg-emerald-900/30 backdrop-blur-sm rounded-2xl p-6 border border-emerald-500/20 shadow-xl shadow-emerald-500/5">
+          <h3 className="text-lg font-semibold text-emerald-100 mb-4 flex items-center gap-2">
+            <span className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center text-sm">🔗</span>
+            Link Berguna
           </h3>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             <a
               href="https://djponline.pajak.go.id"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-800 hover:bg-slate-700 rounded-lg p-4 text-center transition group"
+              className="bg-emerald-950/50 hover:bg-emerald-900/50 rounded-xl p-4 text-center transition group border border-emerald-500/20 hover:border-emerald-400/40"
             >
-              <p className="text-blue-400 font-semibold group-hover:text-blue-300">DJP Online</p>
-              <p className="text-xs text-slate-400 mt-1">Portal Pajak Resmi</p>
+              <p className="text-teal-300 font-semibold group-hover:text-teal-200">DJP Online</p>
+              <p className="text-xs text-emerald-300/60 mt-1">Portal Pajak Resmi</p>
             </a>
             <a
               href="https://www.pajak.go.id"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-800 hover:bg-slate-700 rounded-lg p-4 text-center transition group"
+              className="bg-emerald-950/50 hover:bg-emerald-900/50 rounded-xl p-4 text-center transition group border border-emerald-500/20 hover:border-emerald-400/40"
             >
-              <p className="text-blue-400 font-semibold group-hover:text-blue-300">Pajak.go.id</p>
-              <p className="text-xs text-slate-400 mt-1">Website Resmi DJP</p>
+              <p className="text-teal-300 font-semibold group-hover:text-teal-200">Pajak.go.id</p>
+              <p className="text-xs text-emerald-300/60 mt-1">Website Resmi DJP</p>
             </a>
             <a
               href="https://klikpajak.id"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-800 hover:bg-slate-700 rounded-lg p-4 text-center transition group"
+              className="bg-emerald-950/50 hover:bg-emerald-900/50 rounded-xl p-4 text-center transition group border border-emerald-500/20 hover:border-emerald-400/40"
             >
-              <p className="text-blue-400 font-semibold group-hover:text-blue-300">Klik Pajak</p>
-              <p className="text-xs text-slate-400 mt-1">E-Faktur & E-Billing</p>
+              <p className="text-teal-300 font-semibold group-hover:text-teal-200">Klik Pajak</p>
+              <p className="text-xs text-emerald-300/60 mt-1">E-Faktur & E-Billing</p>
             </a>
             <a
               href="https://www.online-pajak.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-slate-800 hover:bg-slate-700 rounded-lg p-4 text-center transition group"
+              className="bg-emerald-950/50 hover:bg-emerald-900/50 rounded-xl p-4 text-center transition group border border-emerald-500/20 hover:border-emerald-400/40"
             >
-              <p className="text-blue-400 font-semibold group-hover:text-blue-300">Online Pajak</p>
-              <p className="text-xs text-slate-400 mt-1">Aplikasi Pajak Online</p>
+              <p className="text-teal-300 font-semibold group-hover:text-teal-200">Online Pajak</p>
+              <p className="text-xs text-emerald-300/60 mt-1">Aplikasi Pajak Online</p>
             </a>
           </div>
         </div>
       </main>
       
       {/* Footer */}
-      <footer className="mt-12 py-6 border-t border-slate-700">
-        <div className="max-w-7xl mx-auto px-4 text-center text-slate-400 text-sm">
+      <footer className="mt-12 py-6 border-t border-emerald-500/20 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 text-center text-emerald-300/60 text-sm">
           <p>Kalkulator Pajak Indonesia - Untuk Tujuan Edukasi</p>
           <p className="mt-1">Built with Next.js, TypeScript, and Tailwind CSS</p>
         </div>

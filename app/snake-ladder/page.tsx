@@ -1208,12 +1208,21 @@ export default function SnakeLadderGame() {
   // Player selection screen
   if (!gameStarted) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 flex items-center justify-center">
-        <div className="bg-slate-700 rounded-xl p-8 max-w-md w-full mx-4">
-          <h1 className="text-3xl font-bold text-white text-center mb-8">🎲 Snake & Ladder</h1>
+      <div className="min-h-screen bg-gradient-to-br from-amber-950 via-yellow-950 to-orange-950 flex items-center justify-center">
+        {/* Decorative background elements */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 -left-40 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-40 right-1/4 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <div className="bg-amber-900/30 backdrop-blur-sm rounded-2xl p-8 max-w-md w-full mx-4 border border-amber-500/20 shadow-xl shadow-amber-500/5 relative z-10">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-200 to-yellow-200 bg-clip-text text-transparent text-center mb-8 flex items-center justify-center gap-2">
+            <span className="text-4xl">🎲</span> Snake & Ladder
+          </h1>
           
           <div className="mb-8">
-            <h2 className="text-lg font-semibold text-white mb-4 text-center">Select Number of Players</h2>
+            <h2 className="text-lg font-semibold text-amber-100 mb-4 text-center">Select Number of Players</h2>
             <div className="flex justify-center gap-4">
               {[2, 3, 4].map(num => (
                 <button
@@ -1221,8 +1230,8 @@ export default function SnakeLadderGame() {
                   onClick={() => setNumPlayers(num)}
                   className={`w-16 h-16 rounded-xl font-bold text-2xl transition ${
                     numPlayers === num
-                      ? 'bg-blue-600 text-white ring-4 ring-blue-400'
-                      : 'bg-slate-600 text-slate-300 hover:bg-slate-500'
+                      ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white shadow-lg shadow-amber-500/25 ring-4 ring-amber-400/50'
+                      : 'bg-amber-900/40 text-amber-200 hover:bg-amber-800/50 border border-amber-500/20'
                   }`}
                 >
                   {num}
@@ -1232,18 +1241,18 @@ export default function SnakeLadderGame() {
           </div>
           
           <div className="mb-8">
-            <h2 className="text-lg font-semibold text-white mb-4 text-center">Players</h2>
+            <h2 className="text-lg font-semibold text-amber-100 mb-4 text-center">Players</h2>
             <div className="flex justify-center gap-3 flex-wrap">
               {Array.from({ length: numPlayers }).map((_, i) => (
                 <div 
                   key={i}
-                  className="flex items-center gap-2 bg-slate-600 px-3 py-2 rounded-lg"
+                  className="flex items-center gap-2 bg-amber-950/50 px-3 py-2 rounded-xl border border-amber-500/20"
                 >
                   <div 
                     className="w-4 h-4 rounded-full"
                     style={{ backgroundColor: PLAYER_COLORS[i] }}
                   />
-                  <span className="text-white text-sm">{PLAYER_NAMES[i]}</span>
+                  <span className="text-amber-100 text-sm">{PLAYER_NAMES[i]}</span>
                 </div>
               ))}
             </div>
@@ -1251,14 +1260,14 @@ export default function SnakeLadderGame() {
           
           <button
             onClick={startGame}
-            className="w-full py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold text-lg transition"
+            className="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white rounded-xl font-semibold text-lg transition shadow-lg shadow-emerald-500/25"
           >
-            Start Game
+            🎮 Start Game
           </button>
           
           <Link 
             href="/" 
-            className="block text-center text-slate-400 hover:text-blue-400 mt-4 transition"
+            className="block text-center text-amber-300/60 hover:text-amber-200 mt-4 transition"
           >
             ← Back to Portfolio
           </Link>
@@ -1268,20 +1277,29 @@ export default function SnakeLadderGame() {
   }
   
    return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-amber-950 via-yellow-950 to-orange-950">
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl" />
+      </div>
+      
       {/* Header */}
-      <header className="bg-slate-800/80 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
+      <header className="bg-amber-900/40 backdrop-blur-md border-b border-amber-500/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-white hover:text-blue-400 transition flex items-center gap-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <Link href="/" className="text-amber-100 hover:text-amber-300 transition flex items-center gap-2 group">
+            <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Portfolio
           </Link>
-          <h1 className="text-2xl font-bold text-white">🎲 Snake & Ladder</h1>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-200 to-yellow-200 bg-clip-text text-transparent flex items-center gap-2">
+            <span className="text-2xl">🎲</span> Snake & Ladder
+          </h1>
           <button
             onClick={resetGame}
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition"
+            className="px-4 py-2 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 text-white rounded-xl transition shadow-lg shadow-rose-500/25"
           >
             Reset Game
           </button>
@@ -1289,34 +1307,34 @@ export default function SnakeLadderGame() {
       </header>
       
       {/* Mode Selector */}
-      <div className="max-w-7xl mx-auto px-4 py-4">
+      <div className="max-w-7xl mx-auto px-4 py-4 relative z-10">
         <div className="flex flex-wrap gap-2 justify-center">
           <button
             onClick={() => setMode(1)}
-            className={`px-6 py-3 rounded-lg font-semibold transition ${
+            className={`px-6 py-3 rounded-xl font-semibold transition ${
               mode === 1 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white shadow-lg shadow-amber-500/25' 
+                : 'bg-amber-900/40 text-amber-200 hover:bg-amber-800/50 border border-amber-500/20'
             }`}
           >
             Mode 1: Classic 2D
           </button>
           <button
             onClick={() => setMode(2)}
-            className={`px-6 py-3 rounded-lg font-semibold transition ${
+            className={`px-6 py-3 rounded-xl font-semibold transition ${
               mode === 2 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white shadow-lg shadow-amber-500/25' 
+                : 'bg-amber-900/40 text-amber-200 hover:bg-amber-800/50 border border-amber-500/20'
             }`}
           >
             Mode 2: 3D Rotatable
           </button>
           <button
             onClick={() => setMode(3)}
-            className={`px-6 py-3 rounded-lg font-semibold transition ${
+            className={`px-6 py-3 rounded-xl font-semibold transition ${
               mode === 3 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-white shadow-lg shadow-amber-500/25' 
+                : 'bg-amber-900/40 text-amber-200 hover:bg-amber-800/50 border border-amber-500/20'
             }`}
           >
             Mode 3: First Person
@@ -1324,25 +1342,25 @@ export default function SnakeLadderGame() {
         </div>
         
         {mode === 2 && (
-          <p className="text-center text-yellow-400 mt-2 text-sm">
+          <p className="text-center text-amber-300 mt-2 text-sm">
             🖱️ Drag dengan mouse untuk memutar papan. Klik dan geser untuk melihat dari sudut berbeda.
           </p>
         )}
         
         {mode === 3 && (
-          <p className="text-center text-yellow-400 mt-2 text-sm">
+          <p className="text-center text-amber-300 mt-2 text-sm">
             Click on the game area and use WASD or Arrow keys to move. Mouse to look around.
           </p>
         )}
       </div>
       
       {/* Game Area */}
-      <div className="max-w-7xl mx-auto px-4 py-4">
+      <div className="max-w-7xl mx-auto px-4 py-4 relative z-10">
         <div className="grid lg:grid-cols-4 gap-6">
           {/* Game Board */}
           <div className="lg:col-span-3">
             {mode === 1 ? (
-              <div className="flex justify-center items-center bg-slate-700 rounded-xl p-4 min-h-[500px]">
+              <div className="flex justify-center items-center bg-amber-900/30 backdrop-blur-sm rounded-2xl p-4 min-h-[500px] border border-amber-500/20 shadow-xl shadow-amber-500/5">
                 <Board2D 
                   playerPositions={playerPositions} 
                   currentPlayerIndex={currentPlayerIndex}
@@ -1354,10 +1372,10 @@ export default function SnakeLadderGame() {
               <div 
                 ref={canvasRef}
                 onClick={requestPointerLock}
-                className="bg-slate-700 rounded-xl overflow-hidden"
+                className="bg-amber-900/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-amber-500/20 shadow-xl shadow-amber-500/5"
                 style={{ height: '600px' }}
               >
-                <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-white">Loading 3D Engine...</div>}>
+                <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-amber-100">Loading 3D Engine...</div>}>
                   <Canvas shadows>
                     <Scene 
                       playerPositions={playerPositions} 
@@ -1373,49 +1391,49 @@ export default function SnakeLadderGame() {
           
           {/* Controls Panel */}
           <div className="lg:col-span-1">
-            <div className="bg-slate-700 rounded-xl p-6 space-y-6">
+            <div className="bg-amber-900/30 backdrop-blur-sm rounded-2xl p-6 space-y-6 border border-amber-500/20 shadow-xl shadow-amber-500/5">
               {/* Current Player Indicator */}
               <div className="text-center">
-                <h2 className="text-lg font-semibold text-white mb-2">Current Turn</h2>
+                <h2 className="text-lg font-semibold text-amber-100 mb-2">Current Turn</h2>
                 <div 
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg"
-                  style={{ backgroundColor: PLAYER_COLORS[currentPlayerIndex] + '40' }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-amber-500/20"
+                  style={{ backgroundColor: PLAYER_COLORS[currentPlayerIndex] + '30' }}
                 >
                   <div 
                     className="w-5 h-5 rounded-full"
                     style={{ backgroundColor: PLAYER_COLORS[currentPlayerIndex] }}
                   />
-                  <span className="text-white font-semibold">{PLAYER_NAMES[currentPlayerIndex]}</span>
+                  <span className="text-amber-100 font-semibold">{PLAYER_NAMES[currentPlayerIndex]}</span>
                 </div>
               </div>
               
               {/* Game Status */}
               <div className="text-center">
-                <h2 className="text-lg font-semibold text-white mb-2">Game Status</h2>
-                <div className="bg-slate-800 rounded-lg p-4">
-                  <p className="text-slate-300 text-sm">{gameMessage}</p>
+                <h2 className="text-lg font-semibold text-amber-100 mb-2">Game Status</h2>
+                <div className="bg-amber-950/50 rounded-xl p-4 border border-amber-500/20">
+                  <p className="text-amber-200/80 text-sm">{gameMessage}</p>
                 </div>
               </div>
               
               {/* Player Positions */}
               <div>
-                <h2 className="text-lg font-semibold text-white mb-3">Player Positions</h2>
+                <h2 className="text-lg font-semibold text-amber-100 mb-3">Player Positions</h2>
                 <div className="space-y-2">
                   {Array.from({ length: numPlayers }).map((_, i) => (
                     <div 
                       key={i}
-                      className={`flex items-center justify-between px-3 py-2 rounded-lg ${
-                        i === currentPlayerIndex ? 'bg-slate-600 ring-2 ring-white' : 'bg-slate-800'
-                      }`}
+                      className={`flex items-center justify-between px-3 py-2 rounded-xl ${
+                        i === currentPlayerIndex ? 'bg-amber-800/40 ring-2 ring-amber-400/50' : 'bg-amber-950/50'
+                      } border border-amber-500/20`}
                     >
                       <div className="flex items-center gap-2">
                         <div 
                           className="w-4 h-4 rounded-full"
                           style={{ backgroundColor: PLAYER_COLORS[i] }}
                         />
-                        <span className="text-white text-sm">{PLAYER_NAMES[i]}</span>
+                        <span className="text-amber-100 text-sm">{PLAYER_NAMES[i]}</span>
                       </div>
-                      <span className="text-blue-400 font-bold">{playerPositions[i]}</span>
+                      <span className="text-amber-300 font-bold">{playerPositions[i]}</span>
                     </div>
                   ))}
                 </div>
@@ -1423,7 +1441,7 @@ export default function SnakeLadderGame() {
               
               {/* Dice */}
               <div className="text-center">
-                <h2 className="text-lg font-semibold text-white mb-4">Roll Dice</h2>
+                <h2 className="text-lg font-semibold text-amber-100 mb-4">Roll Dice</h2>
                 <div className="flex justify-center">
                   <Dice value={diceValue} rolling={rolling} onRoll={rollDice} />
                 </div>
@@ -1431,10 +1449,10 @@ export default function SnakeLadderGame() {
                   onClick={rollDice}
                   disabled={rolling || winner !== null}
                   className={`
-                    mt-4 w-full py-3 rounded-lg font-semibold transition
+                    mt-4 w-full py-3 rounded-xl font-semibold transition shadow-lg
                     ${rolling || winner !== null
-                      ? 'bg-slate-600 text-slate-400 cursor-not-allowed'
-                      : 'bg-green-600 hover:bg-green-700 text-white'
+                      ? 'bg-amber-900/50 text-amber-400/50 cursor-not-allowed shadow-none'
+                      : 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white shadow-emerald-500/25'
                     }
                   `}
                 >
@@ -1444,15 +1462,15 @@ export default function SnakeLadderGame() {
               
               {/* Legend */}
               <div>
-                <h2 className="text-lg font-semibold text-white mb-3">Legend</h2>
+                <h2 className="text-lg font-semibold text-amber-100 mb-3">Legend</h2>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-red-500 rounded" />
-                    <span className="text-slate-300">🐍 Snake Head (Go Down)</span>
+                    <span className="text-amber-200/80">🐍 Snake Head (Go Down)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-green-500 rounded" />
-                    <span className="text-slate-300">🪜 Ladder Base (Go Up)</span>
+                    <span className="text-amber-200/80">🪜 Ladder Base (Go Up)</span>
                   </div>
                   {Array.from({ length: numPlayers }).map((_, i) => (
                     <div key={i} className="flex items-center gap-2">
@@ -1460,7 +1478,7 @@ export default function SnakeLadderGame() {
                         className="w-4 h-4 rounded-full"
                         style={{ backgroundColor: PLAYER_COLORS[i] }}
                       />
-                      <span className="text-slate-300">{PLAYER_NAMES[i]}</span>
+                      <span className="text-amber-200/80">{PLAYER_NAMES[i]}</span>
                     </div>
                   ))}
                 </div>
@@ -1468,8 +1486,8 @@ export default function SnakeLadderGame() {
               
               {/* Snakes & Ladders Info */}
               <div>
-                <h2 className="text-lg font-semibold text-white mb-3">Snakes</h2>
-                <div className="space-y-1 text-sm text-slate-300">
+                <h2 className="text-lg font-semibold text-amber-100 mb-3">Snakes</h2>
+                <div className="space-y-1 text-sm text-amber-200/80">
                   {Object.entries(SNAKES).map(([start, end]) => (
                     <p key={start}>🐍 {start} → {end}</p>
                   ))}
@@ -1477,8 +1495,8 @@ export default function SnakeLadderGame() {
               </div>
               
               <div>
-                <h2 className="text-lg font-semibold text-white mb-3">Ladders</h2>
-                <div className="space-y-1 text-sm text-slate-300">
+                <h2 className="text-lg font-semibold text-amber-100 mb-3">Ladders</h2>
+                <div className="space-y-1 text-sm text-amber-200/80">
                   {Object.entries(LADDERS).map(([start, end]) => (
                     <p key={start}>🪜 {start} → {end}</p>
                   ))}
@@ -1491,9 +1509,9 @@ export default function SnakeLadderGame() {
       
       {/* Instructions Modal for Mode 2 */}
       {mode === 2 && (
-        <div className="fixed bottom-4 right-4 bg-slate-800 border border-slate-600 rounded-lg p-4 max-w-xs">
-          <h3 className="font-semibold text-white mb-2">Kontrol (Mode 2)</h3>
-          <ul className="text-sm text-slate-300 space-y-1">
+        <div className="fixed bottom-4 right-4 bg-amber-900/80 backdrop-blur-sm border border-amber-500/30 rounded-xl p-4 max-w-xs z-50">
+          <h3 className="font-semibold text-amber-100 mb-2">Kontrol (Mode 2)</h3>
+          <ul className="text-sm text-amber-200/80 space-y-1">
             <li>• 🖱️ Klik & Geser: Putar papan</li>
             <li>• Klik kiri + geser: Rotasi horizontal</li>
             <li>• Klik kiri + geser vertikal: Rotasi vertikal</li>
@@ -1504,9 +1522,9 @@ export default function SnakeLadderGame() {
       
       {/* Instructions Modal for Mode 3 */}
       {mode === 3 && (
-        <div className="fixed bottom-4 right-4 bg-slate-800 border border-slate-600 rounded-lg p-4 max-w-xs">
-          <h3 className="font-semibold text-white mb-2">Controls (Mode 3)</h3>
-          <ul className="text-sm text-slate-300 space-y-1">
+        <div className="fixed bottom-4 right-4 bg-amber-900/80 backdrop-blur-sm border border-amber-500/30 rounded-xl p-4 max-w-xs z-50">
+          <h3 className="font-semibold text-amber-100 mb-2">Controls (Mode 3)</h3>
+          <ul className="text-sm text-amber-200/80 space-y-1">
             <li>• WASD / Arrow Keys: Move</li>
             <li>• Mouse: Look around</li>
             <li>• Click canvas to enable controls</li>
@@ -1518,20 +1536,20 @@ export default function SnakeLadderGame() {
       {/* Victory Modal */}
       {winner !== null && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-slate-800 rounded-xl p-8 text-center max-w-md mx-4">
+          <div className="bg-amber-900/90 backdrop-blur-sm rounded-2xl p-8 text-center max-w-md mx-4 border border-amber-500/30 shadow-xl shadow-amber-500/10">
             <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-3xl font-bold text-white mb-2">Congratulations!</h2>
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-amber-200 to-yellow-200 bg-clip-text text-transparent mb-2">Congratulations!</h2>
             <div className="flex justify-center items-center gap-2 mb-4">
               <div 
                 className="w-6 h-6 rounded-full"
                 style={{ backgroundColor: PLAYER_COLORS[winner] }}
               />
-              <span className="text-xl text-white font-semibold">{PLAYER_NAMES[winner]}</span>
+              <span className="text-xl text-amber-100 font-semibold">{PLAYER_NAMES[winner]}</span>
             </div>
-            <p className="text-slate-300 mb-6">has reached position 100 and won the game!</p>
+            <p className="text-amber-200/80 mb-6">has reached position 100 and won the game!</p>
             <button
               onClick={resetGame}
-              className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition"
+              className="px-8 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white rounded-xl font-semibold transition shadow-lg shadow-emerald-500/25"
             >
               Play Again
             </button>

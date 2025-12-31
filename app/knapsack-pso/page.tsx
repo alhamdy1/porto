@@ -190,8 +190,8 @@ function ConvergenceChart({ data }: { data: number[] }) {
   // Guard against empty data
   if (data.length === 0) {
     return (
-      <div className="w-full h-48 bg-slate-800 rounded-lg p-4 flex items-center justify-center">
-        <span className="text-slate-400">No data to display</span>
+      <div className="w-full h-48 bg-indigo-950/50 rounded-xl p-4 flex items-center justify-center border border-indigo-500/20">
+        <span className="text-indigo-300/60">No data to display</span>
       </div>
     );
   }
@@ -208,21 +208,21 @@ function ConvergenceChart({ data }: { data: number[] }) {
   }).join(' ');
   
   return (
-    <div className="w-full h-48 bg-slate-800 rounded-lg p-4">
+    <div className="w-full h-48 bg-indigo-950/50 rounded-xl p-4 border border-indigo-500/20">
       <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
         {/* Grid lines */}
         {[0, 25, 50, 75, 100].map((y) => (
-          <line key={y} x1="0" y1={y} x2="100" y2={y} stroke="#334155" strokeWidth="0.2" />
+          <line key={y} x1="0" y1={y} x2="100" y2={y} stroke="#4338ca20" strokeWidth="0.2" />
         ))}
         {[0, 25, 50, 75, 100].map((x) => (
-          <line key={x} x1={x} y1="0" x2={x} y2="100" stroke="#334155" strokeWidth="0.2" />
+          <line key={x} x1={x} y1="0" x2={x} y2="100" stroke="#4338ca20" strokeWidth="0.2" />
         ))}
         
         {/* Line chart */}
         {data.length > 1 && (
           <polyline
             fill="none"
-            stroke="#3b82f6"
+            stroke="#818cf8"
             strokeWidth="1"
             points={points}
           />
@@ -238,16 +238,16 @@ function ConvergenceChart({ data }: { data: number[] }) {
               cx={x}
               cy={y}
               r="0.8"
-              fill="#60a5fa"
+              fill="#a5b4fc"
             />
           );
         })}
       </svg>
-      <div className="flex justify-between text-xs text-slate-400 mt-2">
+      <div className="flex justify-between text-xs text-indigo-300/60 mt-2">
         <span>Iteration 0</span>
         <span>Iteration {data.length - 1}</span>
       </div>
-      <div className="flex justify-between text-xs text-slate-400">
+      <div className="flex justify-between text-xs text-indigo-300/60">
         <span>Min: {minValue.toFixed(0)}</span>
         <span>Max: {maxValue.toFixed(0)}</span>
       </div>
@@ -329,20 +329,29 @@ export default function KnapsackPSOPage() {
   }, []);
   
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-violet-950 to-purple-950">
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
+      </div>
+      
       {/* Header */}
-      <header className="bg-slate-800/80 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
+      <header className="bg-indigo-900/40 backdrop-blur-md border-b border-indigo-500/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-white hover:text-blue-400 transition flex items-center gap-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <Link href="/" className="text-indigo-100 hover:text-indigo-300 transition flex items-center gap-2 group">
+            <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Portfolio
           </Link>
-          <h1 className="text-xl md:text-2xl font-bold text-white">🎒 Knapsack Problem - PSO Solver</h1>
+          <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-indigo-200 to-violet-200 bg-clip-text text-transparent flex items-center gap-2">
+            <span className="text-2xl">🎒</span> Knapsack Problem - PSO Solver
+          </h1>
           <button
             onClick={resetToDefault}
-            className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg transition text-sm"
+            className="px-4 py-2 bg-indigo-900/50 hover:bg-indigo-800/60 text-indigo-100 rounded-xl transition text-sm border border-indigo-500/30"
           >
             Reset Items
           </button>
@@ -350,17 +359,20 @@ export default function KnapsackPSOPage() {
       </header>
       
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      <div className="max-w-7xl mx-auto px-4 py-6 relative z-10">
         {/* Introduction */}
-        <div className="bg-slate-700/50 rounded-xl p-6 mb-6">
-          <h2 className="text-xl font-semibold text-white mb-3">📚 About This Project</h2>
-          <p className="text-slate-300 mb-3">
-            The <strong>0/1 Knapsack Problem</strong> is a classic combinatorial optimization problem. 
+        <div className="bg-indigo-900/30 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-indigo-500/20 shadow-xl shadow-indigo-500/5">
+          <h2 className="text-xl font-semibold text-indigo-100 mb-3 flex items-center gap-2">
+            <span className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-lg flex items-center justify-center">📚</span>
+            About This Project
+          </h2>
+          <p className="text-indigo-200/80 mb-3">
+            The <strong className="text-indigo-100">0/1 Knapsack Problem</strong> is a classic combinatorial optimization problem. 
             Given a set of items with weights and values, the goal is to determine which items to include 
             in a knapsack of limited capacity to maximize the total value.
           </p>
-          <p className="text-slate-300">
-            <strong>Particle Swarm Optimization (PSO)</strong> is a metaheuristic algorithm inspired by 
+          <p className="text-indigo-200/80">
+            <strong className="text-indigo-100">Particle Swarm Optimization (PSO)</strong> is a metaheuristic algorithm inspired by 
             the social behavior of birds flocking or fish schooling. Particles &ldquo;fly&rdquo; through the solution 
             space, guided by their own best-known position and the swarm&rsquo;s best-known position.
           </p>
@@ -370,10 +382,13 @@ export default function KnapsackPSOPage() {
           {/* Left Column - Items */}
           <div className="lg:col-span-2 space-y-6">
             {/* Items Table */}
-            <div className="bg-slate-700 rounded-xl p-6">
+            <div className="bg-indigo-900/30 backdrop-blur-sm rounded-2xl p-6 border border-indigo-500/20 shadow-xl shadow-indigo-500/5">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-white">📦 Items ({items.length})</h2>
-                <div className="text-sm text-slate-400">
+                <h2 className="text-lg font-semibold text-indigo-100 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-lg flex items-center justify-center text-sm">📦</span>
+                  Items ({items.length})
+                </h2>
+                <div className="text-sm text-indigo-300/70">
                   Total Weight: {totalStats.totalWeight.toFixed(1)} kg | 
                   Total Value: ${totalStats.totalValue.toFixed(0)}
                 </div>
@@ -386,14 +401,14 @@ export default function KnapsackPSOPage() {
                   placeholder="Item name"
                   value={newItem.name}
                   onChange={(e) => setNewItem(prev => ({ ...prev, name: e.target.value }))}
-                  className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 text-sm"
+                  className="px-3 py-2 bg-indigo-950/50 border border-indigo-500/30 rounded-xl text-indigo-100 placeholder-indigo-400/40 text-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
                 />
                 <input
                   type="number"
                   placeholder="Weight (kg)"
                   value={newItem.weight}
                   onChange={(e) => setNewItem(prev => ({ ...prev, weight: e.target.value }))}
-                  className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 text-sm"
+                  className="px-3 py-2 bg-indigo-950/50 border border-indigo-500/30 rounded-xl text-indigo-100 placeholder-indigo-400/40 text-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
                   step="0.1"
                   min="0"
                 />
@@ -402,12 +417,12 @@ export default function KnapsackPSOPage() {
                   placeholder="Value ($)"
                   value={newItem.value}
                   onChange={(e) => setNewItem(prev => ({ ...prev, value: e.target.value }))}
-                  className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 text-sm"
+                  className="px-3 py-2 bg-indigo-950/50 border border-indigo-500/30 rounded-xl text-indigo-100 placeholder-indigo-400/40 text-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
                   min="0"
                 />
                 <button
                   onClick={handleAddItem}
-                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition text-sm font-medium"
+                  className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white rounded-xl transition text-sm font-medium shadow-lg shadow-emerald-500/25"
                 >
                   Add Item
                 </button>
@@ -417,7 +432,7 @@ export default function KnapsackPSOPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-slate-400 border-b border-slate-600">
+                    <tr className="text-indigo-300/70 border-b border-indigo-500/20">
                       <th className="py-2 text-left">#</th>
                       <th className="py-2 text-left">Name</th>
                       <th className="py-2 text-right">Weight (kg)</th>
@@ -433,28 +448,28 @@ export default function KnapsackPSOPage() {
                       return (
                         <tr 
                           key={item.id} 
-                          className={`border-b border-slate-700 ${isSelected ? 'bg-green-900/30' : ''}`}
+                          className={`border-b border-indigo-500/10 ${isSelected ? 'bg-emerald-500/20' : ''}`}
                         >
-                          <td className="py-2 text-slate-400">{index + 1}</td>
-                          <td className="py-2 text-white">{item.name}</td>
-                          <td className="py-2 text-right text-slate-300">{item.weight.toFixed(1)}</td>
-                          <td className="py-2 text-right text-slate-300">${item.value.toFixed(0)}</td>
-                          <td className="py-2 text-right text-slate-400">
+                          <td className="py-2 text-indigo-300/60">{index + 1}</td>
+                          <td className="py-2 text-indigo-100">{item.name}</td>
+                          <td className="py-2 text-right text-indigo-200/80">{item.weight.toFixed(1)}</td>
+                          <td className="py-2 text-right text-indigo-200/80">${item.value.toFixed(0)}</td>
+                          <td className="py-2 text-right text-indigo-300/60">
                             {(item.value / item.weight).toFixed(0)}
                           </td>
                           <td className="py-2 text-center">
                             {result && (
                               isSelected ? (
-                                <span className="text-green-400">✓</span>
+                                <span className="text-emerald-400">✓</span>
                               ) : (
-                                <span className="text-slate-500">✗</span>
+                                <span className="text-indigo-400/40">✗</span>
                               )
                             )}
                           </td>
                           <td className="py-2 text-center">
                             <button
                               onClick={() => handleRemoveItem(item.id)}
-                              className="text-red-400 hover:text-red-300 transition"
+                              className="text-rose-400/70 hover:text-rose-400 transition"
                             >
                               🗑️
                             </button>
@@ -469,45 +484,48 @@ export default function KnapsackPSOPage() {
             
             {/* Results */}
             {result && (
-              <div className="bg-slate-700 rounded-xl p-6">
-                <h2 className="text-lg font-semibold text-white mb-4">📊 Optimization Results</h2>
+              <div className="bg-indigo-900/30 backdrop-blur-sm rounded-2xl p-6 border border-indigo-500/20 shadow-xl shadow-indigo-500/5">
+                <h2 className="text-lg font-semibold text-indigo-100 mb-4 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-lg flex items-center justify-center text-sm">📊</span>
+                  Optimization Results
+                </h2>
                 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Summary */}
                   <div className="space-y-4">
-                    <div className="bg-slate-800 rounded-lg p-4">
-                      <h3 className="text-sm text-slate-400 mb-2">Best Solution</h3>
+                    <div className="bg-indigo-950/50 rounded-xl p-4 border border-indigo-500/20">
+                      <h3 className="text-sm text-indigo-300/70 mb-2">Best Solution</h3>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-2xl font-bold text-green-400">${result.totalValue.toFixed(0)}</p>
-                          <p className="text-xs text-slate-400">Total Value</p>
+                          <p className="text-2xl font-bold text-emerald-400">${result.totalValue.toFixed(0)}</p>
+                          <p className="text-xs text-indigo-300/60">Total Value</p>
                         </div>
                         <div>
-                          <p className="text-2xl font-bold text-blue-400">{result.totalWeight.toFixed(2)} kg</p>
-                          <p className="text-xs text-slate-400">Total Weight</p>
+                          <p className="text-2xl font-bold text-cyan-400">{result.totalWeight.toFixed(2)} kg</p>
+                          <p className="text-xs text-indigo-300/60">Total Weight</p>
                         </div>
                       </div>
                       <div className="mt-3">
-                        <div className="flex justify-between text-xs text-slate-400 mb-1">
+                        <div className="flex justify-between text-xs text-indigo-300/60 mb-1">
                           <span>Capacity Used</span>
                           <span>{((result.totalWeight / capacity) * 100).toFixed(1)}%</span>
                         </div>
-                        <div className="w-full bg-slate-700 rounded-full h-2">
+                        <div className="w-full bg-indigo-950/50 rounded-full h-2">
                           <div 
-                            className="bg-blue-500 h-2 rounded-full transition-all duration-500"
+                            className="bg-gradient-to-r from-indigo-500 to-violet-500 h-2 rounded-full transition-all duration-500"
                             style={{ width: `${Math.min(100, (result.totalWeight / capacity) * 100)}%` }}
                           />
                         </div>
                       </div>
                     </div>
                     
-                    <div className="bg-slate-800 rounded-lg p-4">
-                      <h3 className="text-sm text-slate-400 mb-2">Selected Items ({result.selectedItems.length})</h3>
+                    <div className="bg-indigo-950/50 rounded-xl p-4 border border-indigo-500/20">
+                      <h3 className="text-sm text-indigo-300/70 mb-2">Selected Items ({result.selectedItems.length})</h3>
                       <div className="space-y-1">
                         {result.selectedItems.map(item => (
                           <div key={item.id} className="flex justify-between text-sm">
-                            <span className="text-white">{item.name}</span>
-                            <span className="text-slate-400">{item.weight}kg / ${item.value}</span>
+                            <span className="text-indigo-100">{item.name}</span>
+                            <span className="text-indigo-300/60">{item.weight}kg / ${item.value}</span>
                           </div>
                         ))}
                       </div>
@@ -516,7 +534,7 @@ export default function KnapsackPSOPage() {
                   
                   {/* Convergence Chart */}
                   <div>
-                    <h3 className="text-sm text-slate-400 mb-2">Convergence History</h3>
+                    <h3 className="text-sm text-indigo-300/70 mb-2">Convergence History</h3>
                     <ConvergenceChart data={result.convergenceHistory} />
                   </div>
                 </div>
@@ -527,10 +545,13 @@ export default function KnapsackPSOPage() {
           {/* Right Column - Parameters */}
           <div className="space-y-6">
             {/* Knapsack Capacity */}
-            <div className="bg-slate-700 rounded-xl p-6">
-              <h2 className="text-lg font-semibold text-white mb-4">🎒 Knapsack Capacity</h2>
+            <div className="bg-indigo-900/30 backdrop-blur-sm rounded-2xl p-6 border border-indigo-500/20 shadow-xl shadow-indigo-500/5">
+              <h2 className="text-lg font-semibold text-indigo-100 mb-4 flex items-center gap-2">
+                <span className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-lg flex items-center justify-center text-sm">🎒</span>
+                Knapsack Capacity
+              </h2>
               <div>
-                <label className="block text-sm text-slate-400 mb-2">
+                <label className="block text-sm text-indigo-200/80 mb-2">
                   Capacity (kg): {capacity}
                 </label>
                 <input
@@ -540,9 +561,9 @@ export default function KnapsackPSOPage() {
                   step="0.5"
                   value={capacity}
                   onChange={(e) => setCapacity(parseFloat(e.target.value))}
-                  className="w-full accent-blue-500"
+                  className="w-full accent-indigo-500"
                 />
-                <div className="flex justify-between text-xs text-slate-500 mt-1">
+                <div className="flex justify-between text-xs text-indigo-400/50 mt-1">
                   <span>1 kg</span>
                   <span>20 kg</span>
                 </div>
@@ -550,13 +571,16 @@ export default function KnapsackPSOPage() {
             </div>
             
             {/* PSO Parameters */}
-            <div className="bg-slate-700 rounded-xl p-6">
-              <h2 className="text-lg font-semibold text-white mb-4">⚙️ PSO Parameters</h2>
+            <div className="bg-indigo-900/30 backdrop-blur-sm rounded-2xl p-6 border border-indigo-500/20 shadow-xl shadow-indigo-500/5">
+              <h2 className="text-lg font-semibold text-indigo-100 mb-4 flex items-center gap-2">
+                <span className="w-8 h-8 bg-gradient-to-br from-violet-500 to-purple-500 rounded-lg flex items-center justify-center text-sm">⚙️</span>
+                PSO Parameters
+              </h2>
               
               <div className="space-y-4">
                 {/* Number of Particles */}
                 <div>
-                  <label className="block text-sm text-slate-400 mb-2">
+                  <label className="block text-sm text-indigo-200/80 mb-2">
                     Particles: {psoParams.numParticles}
                   </label>
                   <input
@@ -569,13 +593,13 @@ export default function KnapsackPSOPage() {
                       ...prev, 
                       numParticles: parseInt(e.target.value) 
                     }))}
-                    className="w-full accent-blue-500"
+                    className="w-full accent-indigo-500"
                   />
                 </div>
                 
                 {/* Max Iterations */}
                 <div>
-                  <label className="block text-sm text-slate-400 mb-2">
+                  <label className="block text-sm text-indigo-200/80 mb-2">
                     Iterations: {psoParams.maxIterations}
                   </label>
                   <input
@@ -588,13 +612,13 @@ export default function KnapsackPSOPage() {
                       ...prev, 
                       maxIterations: parseInt(e.target.value) 
                     }))}
-                    className="w-full accent-blue-500"
+                    className="w-full accent-indigo-500"
                   />
                 </div>
                 
                 {/* Inertia Weight */}
                 <div>
-                  <label className="block text-sm text-slate-400 mb-2">
+                  <label className="block text-sm text-indigo-200/80 mb-2">
                     Inertia (w): {psoParams.w.toFixed(2)}
                   </label>
                   <input
@@ -607,13 +631,13 @@ export default function KnapsackPSOPage() {
                       ...prev, 
                       w: parseFloat(e.target.value) 
                     }))}
-                    className="w-full accent-blue-500"
+                    className="w-full accent-indigo-500"
                   />
                 </div>
                 
                 {/* Cognitive Coefficient */}
                 <div>
-                  <label className="block text-sm text-slate-400 mb-2">
+                  <label className="block text-sm text-indigo-200/80 mb-2">
                     Cognitive (c1): {psoParams.c1.toFixed(2)}
                   </label>
                   <input
@@ -626,13 +650,13 @@ export default function KnapsackPSOPage() {
                       ...prev, 
                       c1: parseFloat(e.target.value) 
                     }))}
-                    className="w-full accent-blue-500"
+                    className="w-full accent-indigo-500"
                   />
                 </div>
                 
                 {/* Social Coefficient */}
                 <div>
-                  <label className="block text-sm text-slate-400 mb-2">
+                  <label className="block text-sm text-indigo-200/80 mb-2">
                     Social (c2): {psoParams.c2.toFixed(2)}
                   </label>
                   <input
@@ -645,16 +669,16 @@ export default function KnapsackPSOPage() {
                       ...prev, 
                       c2: parseFloat(e.target.value) 
                     }))}
-                    className="w-full accent-blue-500"
+                    className="w-full accent-indigo-500"
                   />
                 </div>
               </div>
               
               {/* Parameter Info */}
-              <div className="mt-4 p-3 bg-slate-800 rounded-lg text-xs text-slate-400">
-                <p><strong>w:</strong> Controls exploration vs exploitation</p>
-                <p><strong>c1:</strong> How much to trust personal best</p>
-                <p><strong>c2:</strong> How much to trust global best</p>
+              <div className="mt-4 p-3 bg-indigo-950/50 rounded-xl text-xs text-indigo-300/70 border border-indigo-500/20">
+                <p><strong className="text-indigo-200">w:</strong> Controls exploration vs exploitation</p>
+                <p><strong className="text-indigo-200">c1:</strong> How much to trust personal best</p>
+                <p><strong className="text-indigo-200">c2:</strong> How much to trust global best</p>
               </div>
             </div>
             
@@ -663,10 +687,10 @@ export default function KnapsackPSOPage() {
               onClick={runOptimization}
               disabled={isRunning || items.length === 0}
               className={`
-                w-full py-4 rounded-xl font-semibold text-lg transition
+                w-full py-4 rounded-xl font-semibold text-lg transition shadow-xl
                 ${isRunning || items.length === 0
-                  ? 'bg-slate-600 text-slate-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+                  ? 'bg-indigo-900/50 text-indigo-400/50 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white shadow-indigo-500/25 hover:shadow-indigo-500/40'
                 }
               `}
             >
@@ -684,9 +708,12 @@ export default function KnapsackPSOPage() {
             </button>
             
             {/* Algorithm Info */}
-            <div className="bg-slate-700 rounded-xl p-6">
-              <h2 className="text-lg font-semibold text-white mb-3">📖 Algorithm</h2>
-              <div className="space-y-2 text-sm text-slate-300">
+            <div className="bg-indigo-900/30 backdrop-blur-sm rounded-2xl p-6 border border-indigo-500/20 shadow-xl shadow-indigo-500/5">
+              <h2 className="text-lg font-semibold text-indigo-100 mb-3 flex items-center gap-2">
+                <span className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-lg flex items-center justify-center text-sm">📖</span>
+                Algorithm
+              </h2>
+              <div className="space-y-2 text-sm text-indigo-200/80">
                 <p>1. Initialize swarm with random positions</p>
                 <p>2. Evaluate fitness (value - penalty)</p>
                 <p>3. Update personal and global best</p>
@@ -700,8 +727,8 @@ export default function KnapsackPSOPage() {
       </div>
       
       {/* Footer */}
-      <footer className="mt-12 py-6 border-t border-slate-700">
-        <div className="max-w-7xl mx-auto px-4 text-center text-slate-400 text-sm">
+      <footer className="mt-12 py-6 border-t border-indigo-500/20 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 text-center text-indigo-300/60 text-sm">
           <p>Knapsack Problem Solver using Particle Swarm Optimization (PSO)</p>
           <p className="mt-1">Built with Next.js, TypeScript, and Tailwind CSS</p>
         </div>

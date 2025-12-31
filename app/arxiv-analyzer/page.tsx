@@ -421,15 +421,15 @@ function MetricCard({ icon, label, value, subtext, color = 'blue' }: {
   color?: 'blue' | 'green' | 'purple' | 'orange' | 'red';
 }) {
   const colorClasses = {
-    blue: 'bg-blue-900/30 border-blue-500/50 text-blue-400',
-    green: 'bg-green-900/30 border-green-500/50 text-green-400',
-    purple: 'bg-purple-900/30 border-purple-500/50 text-purple-400',
-    orange: 'bg-orange-900/30 border-orange-500/50 text-orange-400',
-    red: 'bg-red-900/30 border-red-500/50 text-red-400',
+    blue: 'bg-sky-500/20 border-sky-400/30 text-sky-300',
+    green: 'bg-emerald-500/20 border-emerald-400/30 text-emerald-300',
+    purple: 'bg-fuchsia-500/20 border-fuchsia-400/30 text-fuchsia-300',
+    orange: 'bg-amber-500/20 border-amber-400/30 text-amber-300',
+    red: 'bg-rose-500/20 border-rose-400/30 text-rose-300',
   };
   
   return (
-    <div className={`rounded-xl p-4 border ${colorClasses[color]}`}>
+    <div className={`rounded-xl p-4 border backdrop-blur-sm ${colorClasses[color]}`}>
       <div className="flex items-center gap-2 mb-2">
         <span className="text-xl">{icon}</span>
         <span className="text-sm opacity-80">{label}</span>
@@ -444,9 +444,10 @@ function KeywordCloud({ keywords }: { keywords: PaperAnalysis['keywords'] }) {
   if (keywords.length === 0) return null;
   
   return (
-    <div className="bg-slate-700 rounded-xl p-6">
-      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-        🏷️ Extracted Keywords
+    <div className="bg-rose-900/30 backdrop-blur-sm rounded-2xl p-6 border border-rose-500/20 shadow-xl shadow-rose-500/5">
+      <h3 className="text-lg font-semibold text-rose-100 mb-4 flex items-center gap-2">
+        <span className="w-8 h-8 bg-gradient-to-br from-rose-500 to-pink-500 rounded-lg flex items-center justify-center text-sm">🏷️</span>
+        Extracted Keywords
       </h3>
       <div className="flex flex-wrap gap-2">
         {keywords.slice(0, 20).map((kw, idx) => {
@@ -455,7 +456,7 @@ function KeywordCloud({ keywords }: { keywords: PaperAnalysis['keywords'] }) {
           return (
             <span
               key={idx}
-              className={`px-3 py-1 bg-blue-900/40 text-blue-300 rounded-full ${size} ${opacity} hover:bg-blue-900/60 transition cursor-default`}
+              className={`px-3 py-1.5 bg-pink-500/20 text-pink-200 rounded-full ${size} ${opacity} hover:bg-pink-500/30 transition cursor-default border border-pink-500/30`}
               title={`Count: ${kw.count}`}
             >
               {kw.word}
@@ -471,20 +472,21 @@ function TopicsSection({ topics }: { topics: PaperAnalysis['topics'] }) {
   if (topics.length === 0) return null;
   
   return (
-    <div className="bg-slate-700 rounded-xl p-6">
-      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-        📂 Topics & Categories
+    <div className="bg-rose-900/30 backdrop-blur-sm rounded-2xl p-6 border border-rose-500/20 shadow-xl shadow-rose-500/5">
+      <h3 className="text-lg font-semibold text-rose-100 mb-4 flex items-center gap-2">
+        <span className="w-8 h-8 bg-gradient-to-br from-fuchsia-500 to-purple-500 rounded-lg flex items-center justify-center text-sm">📂</span>
+        Topics & Categories
       </h3>
       <div className="space-y-3">
         {topics.map((topic, idx) => (
           <div key={idx}>
             <div className="flex justify-between items-center mb-1">
-              <span className="text-white">{topic.name}</span>
-              <span className="text-sm text-slate-400">{Math.round(topic.confidence * 100)}%</span>
+              <span className="text-rose-100">{topic.name}</span>
+              <span className="text-sm text-rose-300/60">{Math.round(topic.confidence * 100)}%</span>
             </div>
-            <div className="h-2 bg-slate-600 rounded-full overflow-hidden">
+            <div className="h-2 bg-rose-950/50 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
+                className="h-full bg-gradient-to-r from-rose-500 to-pink-500 transition-all duration-500"
                 style={{ width: `${topic.confidence * 100}%` }}
               />
             </div>
@@ -497,36 +499,37 @@ function TopicsSection({ topics }: { topics: PaperAnalysis['topics'] }) {
 
 function EntitiesSection({ entities }: { entities: PaperAnalysis['entities'] }) {
   const sections = [
-    { title: 'Methods & Techniques', icon: '🔧', items: entities.methods, color: 'blue' },
-    { title: 'Datasets', icon: '📊', items: entities.datasets, color: 'green' },
-    { title: 'Evaluation Metrics', icon: '📐', items: entities.metrics, color: 'purple' },
-    { title: 'Technologies', icon: '💻', items: entities.technologies, color: 'orange' },
+    { title: 'Methods & Techniques', icon: '🔧', items: entities.methods, color: 'rose' },
+    { title: 'Datasets', icon: '📊', items: entities.datasets, color: 'emerald' },
+    { title: 'Evaluation Metrics', icon: '📐', items: entities.metrics, color: 'fuchsia' },
+    { title: 'Technologies', icon: '💻', items: entities.technologies, color: 'amber' },
   ];
   
   const nonEmptySections = sections.filter(s => s.items.length > 0);
   if (nonEmptySections.length === 0) return null;
   
   const colorClasses: Record<string, string> = {
-    blue: 'bg-blue-900/40 text-blue-300',
-    green: 'bg-green-900/40 text-green-300',
-    purple: 'bg-purple-900/40 text-purple-300',
-    orange: 'bg-orange-900/40 text-orange-300',
+    rose: 'bg-rose-500/20 text-rose-200 border-rose-500/30',
+    emerald: 'bg-emerald-500/20 text-emerald-200 border-emerald-500/30',
+    fuchsia: 'bg-fuchsia-500/20 text-fuchsia-200 border-fuchsia-500/30',
+    amber: 'bg-amber-500/20 text-amber-200 border-amber-500/30',
   };
   
   return (
-    <div className="bg-slate-700 rounded-xl p-6">
-      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-        🔍 Detected Entities
+    <div className="bg-rose-900/30 backdrop-blur-sm rounded-2xl p-6 border border-rose-500/20 shadow-xl shadow-rose-500/5">
+      <h3 className="text-lg font-semibold text-rose-100 mb-4 flex items-center gap-2">
+        <span className="w-8 h-8 bg-gradient-to-br from-rose-500 to-pink-500 rounded-lg flex items-center justify-center text-sm">🔍</span>
+        Detected Entities
       </h3>
       <div className="grid md:grid-cols-2 gap-4">
         {nonEmptySections.map((section, idx) => (
-          <div key={idx} className="bg-slate-800 rounded-lg p-4">
-            <h4 className="text-sm font-medium text-slate-300 mb-2 flex items-center gap-2">
+          <div key={idx} className="bg-rose-950/50 rounded-xl p-4 border border-rose-500/20">
+            <h4 className="text-sm font-medium text-rose-200 mb-2 flex items-center gap-2">
               {section.icon} {section.title}
             </h4>
             <div className="flex flex-wrap gap-1">
               {section.items.map((item, i) => (
-                <span key={i} className={`px-2 py-0.5 rounded text-xs ${colorClasses[section.color]}`}>
+                <span key={i} className={`px-2 py-0.5 rounded text-xs border ${colorClasses[section.color]}`}>
                   {item}
                 </span>
               ))}
@@ -548,29 +551,30 @@ function StructureAnalysis({ structure }: { structure: PaperAnalysis['structure'
   ];
   
   return (
-    <div className="bg-slate-700 rounded-xl p-6">
-      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-        📋 Paper Structure
+    <div className="bg-rose-900/30 backdrop-blur-sm rounded-2xl p-6 border border-rose-500/20 shadow-xl shadow-rose-500/5">
+      <h3 className="text-lg font-semibold text-rose-100 mb-4 flex items-center gap-2">
+        <span className="w-8 h-8 bg-gradient-to-br from-rose-500 to-pink-500 rounded-lg flex items-center justify-center text-sm">📋</span>
+        Paper Structure
       </h3>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         {items.map((item, idx) => (
           <div
             key={idx}
-            className={`rounded-lg p-3 text-center transition ${
+            className={`rounded-xl p-3 text-center transition border ${
               item.value
-                ? 'bg-green-900/30 border border-green-500/50'
-                : 'bg-slate-800 border border-slate-600'
+                ? 'bg-emerald-500/20 border-emerald-400/30'
+                : 'bg-rose-950/50 border-rose-500/20'
             }`}
           >
             <span className="text-2xl block mb-1">{item.icon}</span>
-            <span className={`text-xs ${item.value ? 'text-green-400' : 'text-slate-400'}`}>
+            <span className={`text-xs ${item.value ? 'text-emerald-300' : 'text-rose-300/60'}`}>
               {item.label}
             </span>
             <div className="mt-1">
               {item.value ? (
-                <span className="text-green-400 text-sm">✓</span>
+                <span className="text-emerald-400 text-sm">✓</span>
               ) : (
-                <span className="text-slate-500 text-sm">—</span>
+                <span className="text-rose-400/40 text-sm">—</span>
               )}
             </div>
           </div>
@@ -582,13 +586,14 @@ function StructureAnalysis({ structure }: { structure: PaperAnalysis['structure'
 
 function SummarySection({ summary }: { summary: string[] }) {
   return (
-    <div className="bg-slate-700 rounded-xl p-6">
-      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-        📝 Key Points Summary
+    <div className="bg-rose-900/30 backdrop-blur-sm rounded-2xl p-6 border border-rose-500/20 shadow-xl shadow-rose-500/5">
+      <h3 className="text-lg font-semibold text-rose-100 mb-4 flex items-center gap-2">
+        <span className="w-8 h-8 bg-gradient-to-br from-rose-500 to-pink-500 rounded-lg flex items-center justify-center text-sm">📝</span>
+        Key Points Summary
       </h3>
       <div className="space-y-3">
         {summary.map((point, idx) => (
-          <p key={idx} className="text-slate-300 text-sm leading-relaxed">
+          <p key={idx} className="text-rose-200/80 text-sm leading-relaxed bg-rose-950/30 p-3 rounded-xl border border-rose-500/10">
             {point}
           </p>
         ))}
@@ -667,43 +672,70 @@ export default function ArxivAnalyzerPage() {
   ];
   
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-rose-950 via-pink-950 to-fuchsia-950">
+      {/* Decorative background elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-rose-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 w-80 h-80 bg-fuchsia-500/10 rounded-full blur-3xl" />
+      </div>
+      
       {/* Header */}
-      <header className="bg-slate-800/80 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
+      <header className="bg-rose-900/40 backdrop-blur-md border-b border-rose-500/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-white hover:text-blue-400 transition flex items-center gap-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <Link href="/" className="text-rose-100 hover:text-rose-300 transition flex items-center gap-2 group">
+            <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Portfolio
           </Link>
-          <h1 className="text-xl md:text-2xl font-bold text-white">📄 arXiv Paper Analyzer</h1>
+          <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-rose-200 to-pink-200 bg-clip-text text-transparent flex items-center gap-2">
+            <span className="text-2xl">📄</span> arXiv Paper Analyzer
+          </h1>
           <div className="w-[140px]" />
         </div>
       </header>
       
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-6">
+      <main className="max-w-7xl mx-auto px-4 py-6 relative z-10">
         {/* Introduction */}
-        <div className="bg-slate-700/50 rounded-xl p-6 mb-6">
-          <h2 className="text-xl font-semibold text-white mb-3">📚 About This Tool</h2>
-          <p className="text-slate-300 mb-3">
-            This tool analyzes academic papers from <strong>arXiv</strong> - the open-access repository 
+        <div className="bg-rose-900/30 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-rose-500/20 shadow-xl shadow-rose-500/5">
+          <h2 className="text-xl font-semibold text-rose-100 mb-3 flex items-center gap-2">
+            <span className="w-10 h-10 bg-gradient-to-br from-rose-500 to-pink-500 rounded-lg flex items-center justify-center">📚</span>
+            About This Tool
+          </h2>
+          <p className="text-rose-200/80 mb-4">
+            This tool analyzes academic papers from <strong className="text-rose-100">arXiv</strong> - the open-access repository 
             for scientific research. Simply enter an arXiv paper ID to get comprehensive analysis including:
           </p>
-          <ul className="grid md:grid-cols-2 gap-2 text-slate-400 text-sm">
-            <li className="flex items-center gap-2">🏷️ Keyword extraction and topic classification</li>
-            <li className="flex items-center gap-2">📊 Reading complexity and time estimation</li>
-            <li className="flex items-center gap-2">🔍 Technical entity detection (methods, datasets, metrics)</li>
-            <li className="flex items-center gap-2">📋 Paper structure analysis</li>
-            <li className="flex items-center gap-2">📝 Automatic key points summary</li>
-            <li className="flex items-center gap-2">📂 Category and topic identification</li>
+          <ul className="grid md:grid-cols-2 gap-3 text-rose-200/70 text-sm">
+            <li className="flex items-center gap-3 bg-rose-800/20 px-4 py-2 rounded-lg">
+              <span className="text-lg">🏷️</span> Keyword extraction and topic classification
+            </li>
+            <li className="flex items-center gap-3 bg-rose-800/20 px-4 py-2 rounded-lg">
+              <span className="text-lg">📊</span> Reading complexity and time estimation
+            </li>
+            <li className="flex items-center gap-3 bg-rose-800/20 px-4 py-2 rounded-lg">
+              <span className="text-lg">🔍</span> Technical entity detection (methods, datasets, metrics)
+            </li>
+            <li className="flex items-center gap-3 bg-rose-800/20 px-4 py-2 rounded-lg">
+              <span className="text-lg">📋</span> Paper structure analysis
+            </li>
+            <li className="flex items-center gap-3 bg-rose-800/20 px-4 py-2 rounded-lg">
+              <span className="text-lg">📝</span> Automatic key points summary
+            </li>
+            <li className="flex items-center gap-3 bg-rose-800/20 px-4 py-2 rounded-lg">
+              <span className="text-lg">📂</span> Category and topic identification
+            </li>
           </ul>
         </div>
         
         {/* Search Section */}
-        <div className="bg-slate-700 rounded-xl p-6 mb-6">
-          <h3 className="text-lg font-semibold text-white mb-4">🔍 Search Paper</h3>
+        <div className="bg-rose-900/30 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-rose-500/20 shadow-xl shadow-rose-500/5">
+          <h3 className="text-lg font-semibold text-rose-100 mb-4 flex items-center gap-2">
+            <span className="w-8 h-8 bg-gradient-to-br from-rose-500 to-pink-500 rounded-lg flex items-center justify-center text-sm">🔍</span>
+            Search Paper
+          </h3>
           
           <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3 mb-4">
             <input
@@ -711,12 +743,12 @@ export default function ArxivAnalyzerPage() {
               value={arxivId}
               onChange={(e) => setArxivId(e.target.value)}
               placeholder="Enter arXiv ID (e.g., 1706.03762 or 2303.08774)"
-              className="flex-1 px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 px-4 py-3 bg-rose-950/50 border border-rose-500/30 rounded-xl text-rose-100 placeholder-rose-400/50 focus:ring-2 focus:ring-rose-400 focus:border-transparent transition-all"
             />
             <button
               type="submit"
               disabled={isLoading || !arxivId.trim()}
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition"
+              className="px-8 py-3 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 disabled:from-rose-800 disabled:to-pink-800 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40"
             >
               {isLoading ? 'Analyzing...' : 'Analyze Paper'}
             </button>
@@ -724,13 +756,13 @@ export default function ArxivAnalyzerPage() {
           
           {/* Example Papers */}
           <div className="mb-4">
-            <p className="text-sm text-slate-400 mb-2">Try these popular papers:</p>
+            <p className="text-sm text-rose-300/70 mb-2">Try these popular papers:</p>
             <div className="flex flex-wrap gap-2">
               {examplePapers.map((ex) => (
                 <button
                   key={ex.id}
                   onClick={() => { setArxivId(ex.id); fetchPaper(ex.id); }}
-                  className="px-3 py-1 bg-slate-800 hover:bg-slate-600 text-slate-300 rounded-full text-sm transition"
+                  className="px-4 py-1.5 bg-rose-800/30 hover:bg-rose-700/40 text-rose-200 rounded-full text-sm transition border border-rose-500/20 hover:border-rose-400/40"
                   title={ex.title}
                 >
                   {ex.id}
@@ -742,13 +774,13 @@ export default function ArxivAnalyzerPage() {
           {/* Recent Searches */}
           {recentSearches.length > 0 && (
             <div>
-              <p className="text-sm text-slate-400 mb-2">Recent searches:</p>
+              <p className="text-sm text-rose-300/70 mb-2">Recent searches:</p>
               <div className="flex flex-wrap gap-2">
                 {recentSearches.map((id) => (
                   <button
                     key={id}
                     onClick={() => { setArxivId(id); fetchPaper(id); }}
-                    className="px-3 py-1 bg-slate-800/50 hover:bg-slate-600 text-slate-400 rounded-full text-sm transition"
+                    className="px-4 py-1.5 bg-rose-950/50 hover:bg-rose-800/40 text-rose-300/80 rounded-full text-sm transition border border-rose-600/20"
                   >
                     {id}
                   </button>
@@ -760,9 +792,9 @@ export default function ArxivAnalyzerPage() {
         
         {/* Error Message */}
         {error && (
-          <div className="bg-red-900/30 border border-red-500/50 rounded-xl p-4 mb-6">
-            <p className="text-red-400 flex items-center gap-2">
-              <span>⚠️</span> {error}
+          <div className="bg-red-900/30 border border-red-500/30 rounded-2xl p-4 mb-6 backdrop-blur-sm">
+            <p className="text-red-300 flex items-center gap-2">
+              <span className="text-xl">⚠️</span> {error}
             </p>
           </div>
         )}
@@ -774,22 +806,22 @@ export default function ArxivAnalyzerPage() {
         {paper && analysis && !isLoading && (
           <div className="space-y-6">
             {/* Paper Info */}
-            <div className="bg-slate-700 rounded-xl p-6">
+            <div className="bg-rose-900/30 backdrop-blur-sm rounded-2xl p-6 border border-rose-500/20 shadow-xl shadow-rose-500/5">
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex-1">
-                  <h2 className="text-2xl font-bold text-white mb-2">{paper.title}</h2>
-                  <p className="text-slate-400 mb-2">
+                  <h2 className="text-2xl font-bold text-rose-50 mb-2">{paper.title}</h2>
+                  <p className="text-rose-200/70 mb-2">
                     {paper.authors.slice(0, 5).join(', ')}
                     {paper.authors.length > 5 && ` and ${paper.authors.length - 5} more`}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-3">
                     {paper.categories.map((cat, idx) => (
-                      <span key={idx} className="px-2 py-1 bg-purple-900/40 text-purple-300 rounded text-xs">
+                      <span key={idx} className="px-3 py-1 bg-fuchsia-500/20 text-fuchsia-200 rounded-lg text-xs border border-fuchsia-500/30">
                         {ARXIV_CATEGORIES[cat] || cat}
                       </span>
                     ))}
                   </div>
-                  <p className="text-sm text-slate-500">
+                  <p className="text-sm text-rose-300/60">
                     Published: {new Date(paper.published).toLocaleDateString('en-US', { 
                       year: 'numeric', month: 'long', day: 'numeric' 
                     })}
@@ -805,7 +837,7 @@ export default function ArxivAnalyzerPage() {
                     href={paper.arxivLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition flex items-center gap-2"
+                    className="px-4 py-2 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 text-white rounded-xl text-sm font-medium transition flex items-center gap-2 shadow-lg shadow-rose-500/25"
                   >
                     📄 View on arXiv
                   </a>
@@ -813,7 +845,7 @@ export default function ArxivAnalyzerPage() {
                     href={paper.pdfLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition flex items-center gap-2"
+                    className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white rounded-xl text-sm font-medium transition flex items-center gap-2 shadow-lg shadow-emerald-500/25"
                   >
                     📥 Download PDF
                   </a>
@@ -821,30 +853,30 @@ export default function ArxivAnalyzerPage() {
               </div>
               
               {/* Abstract */}
-              <div className="bg-slate-800 rounded-lg p-4">
-                <h4 className="text-sm font-semibold text-slate-400 mb-2">Abstract</h4>
-                <p className="text-slate-300 text-sm leading-relaxed">{paper.abstract}</p>
+              <div className="bg-rose-950/50 rounded-xl p-4 border border-rose-500/20">
+                <h4 className="text-sm font-semibold text-rose-300 mb-2">Abstract</h4>
+                <p className="text-rose-100/80 text-sm leading-relaxed">{paper.abstract}</p>
               </div>
               
               {/* Additional Info */}
               {(paper.doi || paper.journalRef || paper.comment) && (
                 <div className="mt-4 grid md:grid-cols-3 gap-3">
                   {paper.doi && (
-                    <div className="bg-slate-800 rounded-lg p-3">
-                      <span className="text-xs text-slate-500">DOI</span>
-                      <p className="text-sm text-slate-300">{paper.doi}</p>
+                    <div className="bg-rose-950/50 rounded-xl p-3 border border-rose-500/20">
+                      <span className="text-xs text-rose-400">DOI</span>
+                      <p className="text-sm text-rose-200">{paper.doi}</p>
                     </div>
                   )}
                   {paper.journalRef && (
-                    <div className="bg-slate-800 rounded-lg p-3">
-                      <span className="text-xs text-slate-500">Journal Reference</span>
-                      <p className="text-sm text-slate-300">{paper.journalRef}</p>
+                    <div className="bg-rose-950/50 rounded-xl p-3 border border-rose-500/20">
+                      <span className="text-xs text-rose-400">Journal Reference</span>
+                      <p className="text-sm text-rose-200">{paper.journalRef}</p>
                     </div>
                   )}
                   {paper.comment && (
-                    <div className="bg-slate-800 rounded-lg p-3">
-                      <span className="text-xs text-slate-500">Comment</span>
-                      <p className="text-sm text-slate-300">{paper.comment}</p>
+                    <div className="bg-rose-950/50 rounded-xl p-3 border border-rose-500/20">
+                      <span className="text-xs text-rose-400">Comment</span>
+                      <p className="text-sm text-rose-200">{paper.comment}</p>
                     </div>
                   )}
                 </div>
@@ -906,28 +938,29 @@ export default function ArxivAnalyzerPage() {
         
         {/* Tips Section */}
         {!paper && !isLoading && (
-          <div className="bg-slate-700/50 rounded-xl p-6 mt-6">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              💡 Tips for Finding Papers
+          <div className="bg-rose-900/30 backdrop-blur-sm rounded-2xl p-6 mt-6 border border-rose-500/20 shadow-xl shadow-rose-500/5">
+            <h3 className="text-lg font-semibold text-rose-100 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg flex items-center justify-center text-sm">💡</span>
+              Tips for Finding Papers
             </h3>
             <div className="grid md:grid-cols-3 gap-4">
-              <div className="bg-slate-800 rounded-lg p-4">
-                <h4 className="text-white font-medium mb-2">Finding arXiv IDs</h4>
-                <p className="text-sm text-slate-400">
-                  The arXiv ID is in the URL. For example, in <code className="text-blue-400">arxiv.org/abs/2303.08774</code>, 
-                  the ID is <code className="text-blue-400">2303.08774</code>
+              <div className="bg-rose-950/50 rounded-xl p-4 border border-rose-500/20">
+                <h4 className="text-rose-100 font-medium mb-2">Finding arXiv IDs</h4>
+                <p className="text-sm text-rose-300/70">
+                  The arXiv ID is in the URL. For example, in <code className="text-pink-300 bg-rose-800/50 px-1 rounded">arxiv.org/abs/2303.08774</code>, 
+                  the ID is <code className="text-pink-300 bg-rose-800/50 px-1 rounded">2303.08774</code>
                 </p>
               </div>
-              <div className="bg-slate-800 rounded-lg p-4">
-                <h4 className="text-white font-medium mb-2">ID Formats</h4>
-                <p className="text-sm text-slate-400">
-                  arXiv uses formats like <code className="text-blue-400">YYMM.NNNNN</code> (new) or 
-                  <code className="text-blue-400">category/YYMMNNN</code> (old)
+              <div className="bg-rose-950/50 rounded-xl p-4 border border-rose-500/20">
+                <h4 className="text-rose-100 font-medium mb-2">ID Formats</h4>
+                <p className="text-sm text-rose-300/70">
+                  arXiv uses formats like <code className="text-pink-300 bg-rose-800/50 px-1 rounded">YYMM.NNNNN</code> (new) or 
+                  <code className="text-pink-300 bg-rose-800/50 px-1 rounded">category/YYMMNNN</code> (old)
                 </p>
               </div>
-              <div className="bg-slate-800 rounded-lg p-4">
-                <h4 className="text-white font-medium mb-2">Paste Full URLs</h4>
-                <p className="text-sm text-slate-400">
+              <div className="bg-rose-950/50 rounded-xl p-4 border border-rose-500/20">
+                <h4 className="text-rose-100 font-medium mb-2">Paste Full URLs</h4>
+                <p className="text-sm text-rose-300/70">
                   You can also paste the full arXiv URL - the tool will automatically extract the paper ID
                 </p>
               </div>
@@ -937,12 +970,12 @@ export default function ArxivAnalyzerPage() {
       </main>
       
       {/* Footer */}
-      <footer className="mt-12 py-6 border-t border-slate-700">
-        <div className="max-w-7xl mx-auto px-4 text-center text-slate-400 text-sm">
+      <footer className="mt-12 py-6 border-t border-rose-500/20 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 text-center text-rose-300/60 text-sm">
           <p>arXiv Paper Analyzer - Analyze and understand research papers</p>
           <p className="mt-1">Built with Next.js, TypeScript, and Tailwind CSS</p>
-          <p className="mt-2 text-xs text-slate-500">
-            Data sourced from <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">arXiv.org</a> API
+          <p className="mt-2 text-xs text-rose-400/40">
+            Data sourced from <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer" className="text-rose-300 hover:underline">arXiv.org</a> API
           </p>
         </div>
       </footer>
