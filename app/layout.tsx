@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import siteConfig from "../site.config";
 
 export const metadata: Metadata = {
-  title: "Portfolio - Pengembang Full Stack & Desainer",
-  description: "Portfolio profesional yang menampilkan proyek pengembangan web, keahlian, sertifikasi, testimoni, dan artikel teknis. Spesialisasi dalam React, Next.js, TypeScript, dan teknologi web modern.",
+  title: `${siteConfig.siteName} - ${siteConfig.personal.title}`,
+  description: siteConfig.siteDescription,
 };
 
 export default function RootLayout({
@@ -12,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang={siteConfig.language}>
       <body className="antialiased">
         {children}
       </body>
