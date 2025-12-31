@@ -458,7 +458,7 @@ function KeywordCloud({ keywords }: { keywords: PaperAnalysis['keywords'] }) {
     <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
       <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
         <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">🏷️</span>
-        Extracted Keywords
+        Kata Kunci Terekstraksi
       </h3>
       <div className="flex flex-wrap gap-2">
         {keywords.slice(0, 20).map((kw, idx) => {
@@ -468,7 +468,7 @@ function KeywordCloud({ keywords }: { keywords: PaperAnalysis['keywords'] }) {
             <span
               key={idx}
               className={`px-3 py-1.5 bg-blue-500/10 text-blue-300 rounded-full ${size} ${opacity} hover:bg-blue-500/20 transition cursor-default border border-blue-500/20`}
-              title={`Count: ${kw.count}`}
+              title={`Jumlah: ${kw.count}`}
             >
               {kw.word}
             </span>
@@ -486,7 +486,7 @@ function TopicsSection({ topics }: { topics: PaperAnalysis['topics'] }) {
     <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
       <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
         <span className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center text-sm">📂</span>
-        Topics & Categories
+        Topik & Kategori
       </h3>
       <div className="space-y-3">
         {topics.map((topic, idx) => (
@@ -698,10 +698,10 @@ export default function ArxivAnalyzerPage() {
             <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Back to Portfolio
+            Kembali ke Portfolio
           </Link>
           <h1 className="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
-            <span className="text-2xl">📄</span> arXiv Paper Analyzer
+            <span className="text-2xl">📄</span> Penganalisis Paper arXiv
           </h1>
           <div className="w-[140px]" />
         </div>
@@ -713,30 +713,30 @@ export default function ArxivAnalyzerPage() {
         <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-slate-700/50 shadow-xl">
           <h2 className="text-xl font-semibold text-white mb-3 flex items-center gap-2">
             <span className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">📚</span>
-            About This Tool
+            Tentang Alat Ini
           </h2>
           <p className="text-slate-300 mb-4">
-            This tool analyzes academic papers from <strong className="text-white">arXiv</strong> - the open-access repository 
-            for scientific research. Simply enter an arXiv paper ID to get comprehensive analysis including:
+            Alat ini menganalisis paper akademis dari <strong className="text-white">arXiv</strong> - repositori akses terbuka 
+            untuk riset ilmiah. Cukup masukkan ID paper arXiv untuk mendapatkan analisis komprehensif termasuk:
           </p>
           <ul className="grid md:grid-cols-2 gap-3 text-slate-400 text-sm">
             <li className="flex items-center gap-3 bg-slate-900/50 px-4 py-2 rounded-lg border border-slate-700/50">
-              <span className="text-lg">🏷️</span> Keyword extraction and topic classification
+              <span className="text-lg">🏷️</span> Ekstraksi kata kunci dan klasifikasi topik
             </li>
             <li className="flex items-center gap-3 bg-slate-900/50 px-4 py-2 rounded-lg border border-slate-700/50">
-              <span className="text-lg">📊</span> Reading complexity and time estimation
+              <span className="text-lg">📊</span> Kompleksitas bacaan dan estimasi waktu
             </li>
             <li className="flex items-center gap-3 bg-slate-900/50 px-4 py-2 rounded-lg border border-slate-700/50">
-              <span className="text-lg">🔍</span> Technical entity detection (methods, datasets, metrics)
+              <span className="text-lg">🔍</span> Deteksi entitas teknis (metode, dataset, metrik)
             </li>
             <li className="flex items-center gap-3 bg-slate-900/50 px-4 py-2 rounded-lg border border-slate-700/50">
-              <span className="text-lg">📋</span> Paper structure analysis
+              <span className="text-lg">📋</span> Analisis struktur paper
             </li>
             <li className="flex items-center gap-3 bg-slate-900/50 px-4 py-2 rounded-lg border border-slate-700/50">
-              <span className="text-lg">📝</span> Automatic key points summary
+              <span className="text-lg">📝</span> Ringkasan poin-poin kunci otomatis
             </li>
             <li className="flex items-center gap-3 bg-slate-900/50 px-4 py-2 rounded-lg border border-slate-700/50">
-              <span className="text-lg">📂</span> Category and topic identification
+              <span className="text-lg">📂</span> Identifikasi kategori dan topik
             </li>
           </ul>
         </div>
@@ -745,7 +745,7 @@ export default function ArxivAnalyzerPage() {
         <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-slate-700/50 shadow-xl">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">🔍</span>
-            Search Paper
+            Cari Paper
           </h3>
           
           <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3 mb-4">
@@ -753,7 +753,7 @@ export default function ArxivAnalyzerPage() {
               type="text"
               value={arxivId}
               onChange={(e) => setArxivId(e.target.value)}
-              placeholder="Enter arXiv ID (e.g., 1706.03762 or 2303.08774)"
+              placeholder="Masukkan ID arXiv (mis. 1706.03762 atau 2303.08774)"
               className="flex-1 px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
             <button
@@ -761,13 +761,13 @@ export default function ArxivAnalyzerPage() {
               disabled={isLoading || !arxivId.trim()}
               className="px-8 py-3 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all shadow-lg"
             >
-              {isLoading ? 'Analyzing...' : 'Analyze Paper'}
+              {isLoading ? 'Menganalisis...' : 'Analisis Paper'}
             </button>
           </form>
           
           {/* Example Papers */}
           <div className="mb-4">
-            <p className="text-sm text-slate-400 mb-2">Try these popular papers:</p>
+            <p className="text-sm text-slate-400 mb-2">Coba paper populer ini:</p>
             <div className="flex flex-wrap gap-2">
               {examplePapers.map((ex) => (
                 <button
@@ -785,7 +785,7 @@ export default function ArxivAnalyzerPage() {
           {/* Recent Searches */}
           {recentSearches.length > 0 && (
             <div>
-              <p className="text-sm text-slate-400 mb-2">Recent searches:</p>
+              <p className="text-sm text-slate-400 mb-2">Pencarian terakhir:</p>
               <div className="flex flex-wrap gap-2">
                 {recentSearches.map((id) => (
                   <button

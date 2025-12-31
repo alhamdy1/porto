@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Portfolio - Full Stack Developer & Designer",
-  description: "Professional portfolio showcasing web development projects, skills, certifications, testimonials, and technical articles. Specialized in React, Next.js, TypeScript, and modern web technologies.",
+  title: "Portfolio - Pengembang Full Stack & Desainer",
+  description: "Portfolio profesional yang menampilkan proyek pengembangan web, keahlian, sertifikasi, testimoni, dan artikel teknis. Spesialisasi dalam React, Next.js, TypeScript, dan teknologi web modern.",
 };
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="id">
       <body className="antialiased">
         {children}
       </body>

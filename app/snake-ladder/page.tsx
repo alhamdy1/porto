@@ -21,7 +21,7 @@ const SNAKE_LADDER_HEIGHT = 3; // Height for snakes and ladders (above walls, li
 
 // Player colors
 const PLAYER_COLORS = ['#eab308', '#ef4444', '#22c55e', '#3b82f6']; // Yellow, Red, Green, Blue
-const PLAYER_NAMES = ['Player 1', 'Player 2', 'Player 3', 'Player 4'];
+const PLAYER_NAMES = ['Pemain 1', 'Pemain 2', 'Pemain 3', 'Pemain 4'];
 
 // Snakes and Ladders positions (start -> end)
 const SNAKES: Record<number, number> = {
@@ -1218,11 +1218,11 @@ export default function SnakeLadderGame() {
         
         <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 max-w-md w-full mx-4 border border-slate-700/50 shadow-xl relative z-10">
           <h1 className="text-3xl font-bold text-white text-center mb-8 flex items-center justify-center gap-2">
-            <span className="text-4xl">🎲</span> Snake & Ladder
+            <span className="text-4xl">🎲</span> Ular Tangga
           </h1>
           
           <div className="mb-8">
-            <h2 className="text-lg font-semibold text-slate-300 mb-4 text-center">Select Number of Players</h2>
+            <h2 className="text-lg font-semibold text-slate-300 mb-4 text-center">Pilih Jumlah Pemain</h2>
             <div className="flex justify-center gap-4">
               {[2, 3, 4].map(num => (
                 <button
@@ -1241,7 +1241,7 @@ export default function SnakeLadderGame() {
           </div>
           
           <div className="mb-8">
-            <h2 className="text-lg font-semibold text-slate-300 mb-4 text-center">Players</h2>
+            <h2 className="text-lg font-semibold text-slate-300 mb-4 text-center">Pemain</h2>
             <div className="flex justify-center gap-3 flex-wrap">
               {Array.from({ length: numPlayers }).map((_, i) => (
                 <div 
@@ -1262,14 +1262,14 @@ export default function SnakeLadderGame() {
             onClick={startGame}
             className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold text-lg transition shadow-lg shadow-lg"
           >
-            🎮 Start Game
+            🎮 Mulai Permainan
           </button>
           
           <Link 
             href="/" 
             className="block text-center text-slate-400/60 hover:text-slate-300 mt-4 transition"
           >
-            ← Back to Portfolio
+            ← Kembali ke Portfolio
           </Link>
         </div>
       </div>
@@ -1292,16 +1292,16 @@ export default function SnakeLadderGame() {
             <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Back to Portfolio
+            Kembali ke Portfolio
           </Link>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-            <span className="text-2xl">🎲</span> Snake & Ladder
+            <span className="text-2xl">🎲</span> Ular Tangga
           </h1>
           <button
             onClick={resetGame}
             className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl transition shadow-lg shadow-lg"
           >
-            Reset Game
+            Reset Permainan
           </button>
         </div>
       </header>
@@ -1317,7 +1317,7 @@ export default function SnakeLadderGame() {
                 : 'bg-slate-900/80 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
-            Mode 1: Classic 2D
+            Mode 1: Klasik 2D
           </button>
           <button
             onClick={() => setMode(2)}
@@ -1327,7 +1327,7 @@ export default function SnakeLadderGame() {
                 : 'bg-slate-900/80 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
-            Mode 2: 3D Rotatable
+            Mode 2: 3D Dapat Diputar
           </button>
           <button
             onClick={() => setMode(3)}
@@ -1337,7 +1337,7 @@ export default function SnakeLadderGame() {
                 : 'bg-slate-900/80 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
-            Mode 3: First Person
+            Mode 3: Orang Pertama
           </button>
         </div>
         
@@ -1349,7 +1349,7 @@ export default function SnakeLadderGame() {
         
         {mode === 3 && (
           <p className="text-center text-slate-400 mt-2 text-sm">
-            Click on the game area and use WASD or Arrow keys to move. Mouse to look around.
+            Klik di area permainan dan gunakan WASD atau tombol panah untuk bergerak. Mouse untuk melihat sekeliling.
           </p>
         )}
       </div>
@@ -1394,7 +1394,7 @@ export default function SnakeLadderGame() {
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 space-y-6 border border-slate-700/50 shadow-xl">
               {/* Current Player Indicator */}
               <div className="text-center">
-                <h2 className="text-lg font-semibold text-slate-300 mb-2">Current Turn</h2>
+                <h2 className="text-lg font-semibold text-slate-300 mb-2">Giliran Saat Ini</h2>
                 <div 
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-700/50"
                   style={{ backgroundColor: PLAYER_COLORS[currentPlayerIndex] + '30' }}
@@ -1409,7 +1409,7 @@ export default function SnakeLadderGame() {
               
               {/* Game Status */}
               <div className="text-center">
-                <h2 className="text-lg font-semibold text-slate-300 mb-2">Game Status</h2>
+                <h2 className="text-lg font-semibold text-slate-300 mb-2">Status Permainan</h2>
                 <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50">
                   <p className="text-slate-300/80 text-sm">{gameMessage}</p>
                 </div>
@@ -1417,7 +1417,7 @@ export default function SnakeLadderGame() {
               
               {/* Player Positions */}
               <div>
-                <h2 className="text-lg font-semibold text-slate-300 mb-3">Player Positions</h2>
+                <h2 className="text-lg font-semibold text-slate-300 mb-3">Posisi Pemain</h2>
                 <div className="space-y-2">
                   {Array.from({ length: numPlayers }).map((_, i) => (
                     <div 
@@ -1441,7 +1441,7 @@ export default function SnakeLadderGame() {
               
               {/* Dice */}
               <div className="text-center">
-                <h2 className="text-lg font-semibold text-slate-300 mb-4">Roll Dice</h2>
+                <h2 className="text-lg font-semibold text-slate-300 mb-4">Lempar Dadu</h2>
                 <div className="flex justify-center">
                   <Dice value={diceValue} rolling={rolling} onRoll={rollDice} />
                 </div>
@@ -1456,21 +1456,21 @@ export default function SnakeLadderGame() {
                     }
                   `}
                 >
-                  {winner !== null ? `🎉 ${PLAYER_NAMES[winner]} Won!` : rolling ? 'Rolling...' : 'Roll Dice'}
+                  {winner !== null ? `🎉 ${PLAYER_NAMES[winner]} Menang!` : rolling ? 'Melempar...' : 'Lempar Dadu'}
                 </button>
               </div>
               
               {/* Legend */}
               <div>
-                <h2 className="text-lg font-semibold text-slate-300 mb-3">Legend</h2>
+                <h2 className="text-lg font-semibold text-slate-300 mb-3">Keterangan</h2>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-red-500 rounded" />
-                    <span className="text-slate-300/80">🐍 Snake Head (Go Down)</span>
+                    <span className="text-slate-300/80">🐍 Kepala Ular (Turun)</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 bg-green-500 rounded" />
-                    <span className="text-slate-300/80">🪜 Ladder Base (Go Up)</span>
+                    <span className="text-slate-300/80">🪜 Pangkal Tangga (Naik)</span>
                   </div>
                   {Array.from({ length: numPlayers }).map((_, i) => (
                     <div key={i} className="flex items-center gap-2">
@@ -1486,7 +1486,7 @@ export default function SnakeLadderGame() {
               
               {/* Snakes & Ladders Info */}
               <div>
-                <h2 className="text-lg font-semibold text-slate-300 mb-3">Snakes</h2>
+                <h2 className="text-lg font-semibold text-slate-300 mb-3">Ular</h2>
                 <div className="space-y-1 text-sm text-slate-300/80">
                   {Object.entries(SNAKES).map(([start, end]) => (
                     <p key={start}>🐍 {start} → {end}</p>
@@ -1495,7 +1495,7 @@ export default function SnakeLadderGame() {
               </div>
               
               <div>
-                <h2 className="text-lg font-semibold text-slate-300 mb-3">Ladders</h2>
+                <h2 className="text-lg font-semibold text-slate-300 mb-3">Tangga</h2>
                 <div className="space-y-1 text-sm text-slate-300/80">
                   {Object.entries(LADDERS).map(([start, end]) => (
                     <p key={start}>🪜 {start} → {end}</p>
@@ -1523,12 +1523,12 @@ export default function SnakeLadderGame() {
       {/* Instructions Modal for Mode 3 */}
       {mode === 3 && (
         <div className="fixed bottom-4 right-4 bg-slate-800/80 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 max-w-xs z-50">
-          <h3 className="font-semibold text-slate-300 mb-2">Controls (Mode 3)</h3>
+          <h3 className="font-semibold text-slate-300 mb-2">Kontrol (Mode 3)</h3>
           <ul className="text-sm text-slate-300/80 space-y-1">
-            <li>• WASD / Arrow Keys: Move</li>
-            <li>• Mouse: Look around</li>
-            <li>• Click canvas to enable controls</li>
-            <li>• ESC: Release mouse</li>
+            <li>• WASD / Tombol Panah: Bergerak</li>
+            <li>• Mouse: Melihat sekeliling</li>
+            <li>• Klik kanvas untuk mengaktifkan kontrol</li>
+            <li>• ESC: Lepas mouse</li>
           </ul>
         </div>
       )}
@@ -1538,7 +1538,7 @@ export default function SnakeLadderGame() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-slate-800/90 backdrop-blur-sm rounded-2xl p-8 text-center max-w-md mx-4 border border-slate-700/50 shadow-xl shadow-lg">
             <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-3xl font-bold text-white mb-2">Congratulations!</h2>
+            <h2 className="text-3xl font-bold text-white mb-2">Selamat!</h2>
             <div className="flex justify-center items-center gap-2 mb-4">
               <div 
                 className="w-6 h-6 rounded-full"
@@ -1546,12 +1546,12 @@ export default function SnakeLadderGame() {
               />
               <span className="text-xl text-slate-300 font-semibold">{PLAYER_NAMES[winner]}</span>
             </div>
-            <p className="text-slate-300/80 mb-6">has reached position 100 and won the game!</p>
+            <p className="text-slate-300/80 mb-6">telah mencapai posisi 100 dan memenangkan permainan!</p>
             <button
               onClick={resetGame}
               className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold transition shadow-lg shadow-lg"
             >
-              Play Again
+              Main Lagi
             </button>
           </div>
         </div>
