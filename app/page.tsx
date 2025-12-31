@@ -439,6 +439,34 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Project 6 - Tax Calculator */}
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition group">
+              <div className="h-48 bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center relative overflow-hidden">
+                <span className="text-white text-6xl group-hover:scale-110 transition-transform">🧾</span>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  Kalkulator Pajak Indonesia
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  Web interaktif untuk menghitung pajak Indonesia (PPh 21, PPN, PPh Final UMKM) dengan informasi lengkap tentang perpajakan
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 rounded-full text-sm">Tax</span>
+                  <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 rounded-full text-sm">TypeScript</span>
+                  <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 rounded-full text-sm">Next.js</span>
+                </div>
+                <div className="flex gap-3">
+                  <a href="/pajak" className="flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline text-sm font-semibold">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    Hitung Pajak
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
