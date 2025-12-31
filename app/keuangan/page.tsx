@@ -94,20 +94,20 @@ function SummaryCard({ title, amount, icon, color, subtitle }: {
   subtitle?: string;
 }) {
   const colorClasses = {
-    green: 'bg-emerald-500/20 border-emerald-400/30 text-emerald-300',
-    red: 'bg-rose-500/20 border-rose-400/30 text-rose-300',
-    blue: 'bg-cyan-500/20 border-cyan-400/30 text-cyan-300',
-    purple: 'bg-violet-500/20 border-violet-400/30 text-violet-300',
+    green: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
+    red: 'bg-red-500/10 border-red-500/20 text-red-400',
+    blue: 'bg-blue-500/10 border-blue-500/20 text-blue-400',
+    purple: 'bg-purple-500/10 border-purple-500/20 text-purple-400',
   };
 
   return (
     <div className={`rounded-2xl p-5 border backdrop-blur-sm shadow-xl ${colorClasses[color]}`}>
       <div className="flex items-center gap-3 mb-2">
         <span className="text-2xl">{icon}</span>
-        <span className="text-sm opacity-80">{title}</span>
+        <span className="text-sm text-slate-400">{title}</span>
       </div>
-      <p className="text-2xl font-bold">{formatCurrency(amount)}</p>
-      {subtitle && <p className="text-xs opacity-60 mt-1">{subtitle}</p>}
+      <p className="text-2xl font-bold text-white">{formatCurrency(amount)}</p>
+      {subtitle && <p className="text-xs text-slate-500 mt-1">{subtitle}</p>}
     </div>
   );
 }
@@ -144,9 +144,9 @@ function TransactionForm({ onAdd }: { onAdd: (transaction: Transaction) => void 
   }, [type, amount, category, description, date, onAdd]);
 
   return (
-    <div className="bg-cyan-900/30 backdrop-blur-sm rounded-2xl p-6 border border-cyan-500/20 shadow-xl shadow-cyan-500/5">
-      <h3 className="text-xl font-semibold text-cyan-100 mb-4 flex items-center gap-2">
-        <span className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-sky-500 rounded-lg flex items-center justify-center text-sm">➕</span>
+    <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
+      <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+        <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">➕</span>
         Tambah Transaksi
       </h3>
 
@@ -158,8 +158,8 @@ function TransactionForm({ onAdd }: { onAdd: (transaction: Transaction) => void 
             onClick={() => { setType('income'); setCategory(''); }}
             className={`py-3 px-4 rounded-xl font-medium transition flex items-center justify-center gap-2 ${
               type === 'income'
-                ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25'
-                : 'bg-cyan-900/40 text-cyan-200 hover:bg-cyan-800/50 border border-cyan-500/20'
+                ? 'bg-emerald-600 text-white shadow-lg'
+                : 'bg-slate-900/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
             📥 Pemasukan
@@ -169,8 +169,8 @@ function TransactionForm({ onAdd }: { onAdd: (transaction: Transaction) => void 
             onClick={() => { setType('expense'); setCategory(''); }}
             className={`py-3 px-4 rounded-xl font-medium transition flex items-center justify-center gap-2 ${
               type === 'expense'
-                ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg shadow-rose-500/25'
-                : 'bg-cyan-900/40 text-cyan-200 hover:bg-cyan-800/50 border border-cyan-500/20'
+                ? 'bg-red-600 text-white shadow-lg'
+                : 'bg-slate-900/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
             📤 Pengeluaran
@@ -179,7 +179,7 @@ function TransactionForm({ onAdd }: { onAdd: (transaction: Transaction) => void 
 
         {/* Amount Input */}
         <div>
-          <label className="block text-sm text-cyan-200/80 mb-2">Jumlah (Rp)</label>
+          <label className="block text-sm text-slate-400 mb-2">Jumlah (Rp)</label>
           <input
             type="text"
             value={amount}
@@ -188,14 +188,14 @@ function TransactionForm({ onAdd }: { onAdd: (transaction: Transaction) => void 
               setAmount(value > 0 ? formatNumber(value) : '');
             }}
             placeholder="Contoh: 500.000"
-            className="w-full px-4 py-3 bg-cyan-950/50 border border-cyan-500/30 rounded-xl text-cyan-100 placeholder-cyan-400/40 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all"
+            className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             required
           />
         </div>
 
         {/* Category Selection */}
         <div>
-          <label className="block text-sm text-cyan-200/80 mb-2">Kategori</label>
+          <label className="block text-sm text-slate-400 mb-2">Kategori</label>
           <div className="grid grid-cols-3 gap-2">
             {categories.map((cat) => (
               <button
@@ -204,8 +204,8 @@ function TransactionForm({ onAdd }: { onAdd: (transaction: Transaction) => void 
                 onClick={() => setCategory(cat.id)}
                 className={`py-2 px-3 rounded-xl text-sm transition flex flex-col items-center gap-1 ${
                   category === cat.id
-                    ? type === 'income' ? 'bg-emerald-500/30 text-emerald-200 border border-emerald-400/50' : 'bg-rose-500/30 text-rose-200 border border-rose-400/50'
-                    : 'bg-cyan-900/40 text-cyan-200 hover:bg-cyan-800/50 border border-cyan-500/20'
+                    ? type === 'income' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-red-500/20 text-red-300 border border-red-500/30'
+                    : 'bg-slate-900/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
                 }`}
               >
                 <span className="text-lg">{cat.icon}</span>
@@ -217,24 +217,24 @@ function TransactionForm({ onAdd }: { onAdd: (transaction: Transaction) => void 
 
         {/* Description Input */}
         <div>
-          <label className="block text-sm text-cyan-200/80 mb-2">Deskripsi (Opsional)</label>
+          <label className="block text-sm text-slate-400 mb-2">Deskripsi (Opsional)</label>
           <input
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Contoh: Makan siang di kantor"
-            className="w-full px-4 py-3 bg-cyan-950/50 border border-cyan-500/30 rounded-xl text-cyan-100 placeholder-cyan-400/40 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all"
+            className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
           />
         </div>
 
         {/* Date Input */}
         <div>
-          <label className="block text-sm text-cyan-200/80 mb-2">Tanggal</label>
+          <label className="block text-sm text-slate-400 mb-2">Tanggal</label>
           <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full px-4 py-3 bg-cyan-950/50 border border-cyan-500/30 rounded-xl text-cyan-100 focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all"
+            className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-xl text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             required
           />
         </div>
@@ -245,8 +245,8 @@ function TransactionForm({ onAdd }: { onAdd: (transaction: Transaction) => void 
           disabled={!amount || !category}
           className={`w-full py-3 rounded-xl font-semibold transition shadow-lg ${
             type === 'income'
-              ? 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 disabled:from-cyan-800 disabled:to-sky-800 shadow-emerald-500/25'
-              : 'bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-400 hover:to-pink-400 disabled:from-cyan-800 disabled:to-sky-800 shadow-rose-500/25'
+              ? 'bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700'
+              : 'bg-red-600 hover:bg-red-500 disabled:bg-slate-700'
           } text-white disabled:cursor-not-allowed disabled:shadow-none`}
         >
           Tambah {type === 'income' ? 'Pemasukan' : 'Pengeluaran'}
@@ -275,9 +275,9 @@ function TransactionList({ transactions, onDelete }: {
   }, [transactions, filter, searchTerm]);
 
   return (
-    <div className="bg-cyan-900/30 backdrop-blur-sm rounded-2xl p-6 border border-cyan-500/20 shadow-xl shadow-cyan-500/5">
-      <h3 className="text-xl font-semibold text-cyan-100 mb-4 flex items-center gap-2">
-        <span className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-sky-500 rounded-lg flex items-center justify-center text-sm">📋</span>
+    <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
+      <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+        <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">📋</span>
         Riwayat Transaksi
       </h3>
 
@@ -287,7 +287,7 @@ function TransactionList({ transactions, onDelete }: {
           <button
             onClick={() => setFilter('all')}
             className={`px-4 py-2 rounded-xl text-sm transition ${
-              filter === 'all' ? 'bg-gradient-to-r from-cyan-500 to-sky-500 text-white shadow-lg shadow-cyan-500/25' : 'bg-cyan-900/40 text-cyan-200 hover:bg-cyan-800/50 border border-cyan-500/20'
+              filter === 'all' ? 'bg-blue-600 text-white shadow-lg' : 'bg-slate-900/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
             Semua
@@ -295,7 +295,7 @@ function TransactionList({ transactions, onDelete }: {
           <button
             onClick={() => setFilter('income')}
             className={`px-4 py-2 rounded-xl text-sm transition ${
-              filter === 'income' ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25' : 'bg-cyan-900/40 text-cyan-200 hover:bg-cyan-800/50 border border-cyan-500/20'
+              filter === 'income' ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-900/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
             Pemasukan
@@ -303,7 +303,7 @@ function TransactionList({ transactions, onDelete }: {
           <button
             onClick={() => setFilter('expense')}
             className={`px-4 py-2 rounded-xl text-sm transition ${
-              filter === 'expense' ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg shadow-rose-500/25' : 'bg-cyan-900/40 text-cyan-200 hover:bg-cyan-800/50 border border-cyan-500/20'
+              filter === 'expense' ? 'bg-red-600 text-white shadow-lg' : 'bg-slate-900/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
             Pengeluaran
@@ -314,14 +314,14 @@ function TransactionList({ transactions, onDelete }: {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Cari transaksi..."
-          className="flex-1 px-4 py-2 bg-cyan-950/50 border border-cyan-500/30 rounded-xl text-cyan-100 placeholder-cyan-400/40 text-sm focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all"
+          className="flex-1 px-4 py-2 bg-slate-900/50 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
         />
       </div>
 
       {/* Transaction List */}
       <div className="space-y-2 max-h-96 overflow-y-auto">
         {filteredTransactions.length === 0 ? (
-          <div className="text-center py-8 text-cyan-300/60">
+          <div className="text-center py-8 text-slate-500">
             <p className="text-4xl mb-2">📭</p>
             <p>Belum ada transaksi</p>
           </div>
@@ -331,25 +331,25 @@ function TransactionList({ transactions, onDelete }: {
             return (
               <div
                 key={transaction.id}
-                className="bg-cyan-950/50 rounded-xl p-4 flex items-center justify-between hover:bg-cyan-900/40 transition border border-cyan-500/10"
+                className="bg-slate-900/50 rounded-xl p-4 flex items-center justify-between hover:bg-slate-800/50 transition border border-slate-700/50"
               >
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">{categoryInfo.icon}</span>
                   <div>
-                    <p className="text-cyan-100 font-medium">{categoryInfo.name}</p>
+                    <p className="text-white font-medium">{categoryInfo.name}</p>
                     {transaction.description && (
-                      <p className="text-sm text-cyan-300/60">{transaction.description}</p>
+                      <p className="text-sm text-slate-500">{transaction.description}</p>
                     )}
-                    <p className="text-xs text-cyan-400/40">{formatDate(transaction.date)}</p>
+                    <p className="text-xs text-slate-600">{formatDate(transaction.date)}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <p className={`font-bold ${transaction.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                  <p className={`font-bold ${transaction.type === 'income' ? 'text-emerald-400' : 'text-red-400'}`}>
                     {transaction.type === 'income' ? '+' : '-'}{formatCurrency(transaction.amount)}
                   </p>
                   <button
                     onClick={() => onDelete(transaction.id)}
-                    className="p-2 text-cyan-400/50 hover:text-rose-400 hover:bg-rose-900/30 rounded-lg transition"
+                    className="p-2 text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition"
                     title="Hapus"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -390,14 +390,14 @@ function CategoryStats({ transactions, type }: { transactions: Transaction[]; ty
   const colors = type === 'income' ? INCOME_CHART_COLORS : EXPENSE_CHART_COLORS;
 
   return (
-    <div className="bg-cyan-900/30 backdrop-blur-sm rounded-2xl p-6 border border-cyan-500/20 shadow-xl shadow-cyan-500/5">
-      <h3 className="text-xl font-semibold text-cyan-100 mb-4 flex items-center gap-2">
-        <span className={`w-8 h-8 bg-gradient-to-br ${type === 'income' ? 'from-emerald-500 to-teal-500' : 'from-rose-500 to-pink-500'} rounded-lg flex items-center justify-center text-sm`}>📊</span>
+    <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
+      <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+        <span className={`w-8 h-8 bg-gradient-to-br ${type === 'income' ? 'from-emerald-500 to-emerald-600' : 'from-red-500 to-red-600'} rounded-lg flex items-center justify-center text-sm`}>📊</span>
         {type === 'income' ? 'Statistik Pemasukan' : 'Statistik Pengeluaran'}
       </h3>
 
       {stats.categoryTotals.length === 0 ? (
-        <div className="text-center py-8 text-cyan-300/60">
+        <div className="text-center py-8 text-slate-500">
           <p className="text-4xl mb-2">📊</p>
           <p>Belum ada data {type === 'income' ? 'pemasukan' : 'pengeluaran'}</p>
         </div>
@@ -405,7 +405,7 @@ function CategoryStats({ transactions, type }: { transactions: Transaction[]; ty
         <>
           {/* Progress Bar Chart */}
           <div className="mb-4">
-            <div className="h-6 rounded-full overflow-hidden flex bg-cyan-950/50">
+            <div className="h-6 rounded-full overflow-hidden flex bg-slate-900/50">
               {stats.categoryTotals.map((cat, idx) => (
                 <div
                   key={cat.id}
@@ -425,12 +425,12 @@ function CategoryStats({ transactions, type }: { transactions: Transaction[]; ty
                 <span className="text-lg">{cat.icon}</span>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <span className="text-cyan-100">{cat.name}</span>
-                    <span className={`font-bold ${type === 'income' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                    <span className="text-white">{cat.name}</span>
+                    <span className={`font-bold ${type === 'income' ? 'text-emerald-400' : 'text-red-400'}`}>
                       {formatCurrency(cat.total)}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center text-xs text-cyan-400/60">
+                  <div className="flex justify-between items-center text-xs text-slate-500">
                     <span>{cat.percentage.toFixed(1)}%</span>
                   </div>
                 </div>
@@ -439,9 +439,9 @@ function CategoryStats({ transactions, type }: { transactions: Transaction[]; ty
           </div>
 
           {/* Total */}
-          <div className={`mt-4 pt-4 border-t border-cyan-500/20 flex justify-between items-center`}>
-            <span className="text-cyan-100 font-semibold">Total</span>
-            <span className={`text-xl font-bold ${type === 'income' ? 'text-emerald-400' : 'text-rose-400'}`}>
+          <div className={`mt-4 pt-4 border-t border-slate-700/50 flex justify-between items-center`}>
+            <span className="text-white font-semibold">Total</span>
+            <span className={`text-xl font-bold ${type === 'income' ? 'text-emerald-400' : 'text-red-400'}`}>
               {formatCurrency(stats.total)}
             </span>
           </div>
@@ -497,14 +497,15 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
   };
 
   return (
-    <div className="bg-slate-700 rounded-xl p-6">
+    <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
       <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-        💰 Anggaran Bulanan
+        <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">💰</span>
+        Anggaran Bulanan
       </h3>
 
       {/* Add Budget */}
       <div className="mb-4">
-        <label className="block text-sm text-slate-300 mb-2">Tambah/Edit Anggaran</label>
+        <label className="block text-sm text-slate-400 mb-2">Tambah/Edit Anggaran</label>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {EXPENSE_CATEGORIES.map((cat) => (
             <button
@@ -514,7 +515,7 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
                 const existing = budgets.find(b => b.category === cat.id);
                 setEditValue(existing ? formatNumber(existing.limit) : '');
               }}
-              className="py-2 px-3 rounded-lg text-sm bg-slate-600 text-slate-300 hover:bg-slate-500 transition flex items-center gap-2"
+              className="py-2 px-3 rounded-lg text-sm bg-slate-900/50 text-slate-300 hover:bg-slate-700/50 transition flex items-center gap-2 border border-slate-700/50"
             >
               <span>{cat.icon}</span>
               <span className="text-xs">{cat.name}</span>
@@ -526,7 +527,7 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
       {/* Edit Modal */}
       {editingCategory && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-xl p-6 w-full max-w-md">
+          <div className="bg-slate-800 rounded-xl p-6 w-full max-w-md border border-slate-700/50">
             <h4 className="text-lg font-semibold text-white mb-4">
               Set Anggaran: {getCategoryInfo(editingCategory, 'expense').icon} {getCategoryInfo(editingCategory, 'expense').name}
             </h4>
@@ -538,19 +539,19 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
                 setEditValue(value > 0 ? formatNumber(value) : '');
               }}
               placeholder="Contoh: 1.000.000"
-              className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 mb-4"
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-lg text-white placeholder-slate-500 mb-4"
               autoFocus
             />
             <div className="flex gap-2">
               <button
                 onClick={() => handleSetBudget(editingCategory)}
-                className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
+                className="flex-1 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition"
               >
                 Simpan
               </button>
               <button
                 onClick={() => { setEditingCategory(null); setEditValue(''); }}
-                className="flex-1 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg transition"
+                className="flex-1 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition"
               >
                 Batal
               </button>
@@ -561,7 +562,7 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
 
       {/* Budget Progress */}
       {budgetStats.length === 0 ? (
-        <div className="text-center py-8 text-slate-400">
+        <div className="text-center py-8 text-slate-500">
           <p className="text-4xl mb-2">💰</p>
           <p>Belum ada anggaran yang ditetapkan</p>
           <p className="text-sm mt-1">Klik kategori di atas untuk menambah anggaran</p>
@@ -569,7 +570,7 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
       ) : (
         <div className="space-y-4">
           {budgetStats.map((budget) => (
-            <div key={budget.id} className="bg-slate-800 rounded-lg p-4">
+            <div key={budget.id} className="bg-slate-900/50 rounded-lg p-4 border border-slate-700/50">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <span className="text-lg">{budget.icon}</span>
@@ -577,7 +578,7 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
                 </div>
                 <button
                   onClick={() => handleRemoveBudget(budget.id)}
-                  className="text-slate-400 hover:text-red-400 transition"
+                  className="text-slate-500 hover:text-red-400 transition"
                   title="Hapus anggaran"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -587,11 +588,11 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
               </div>
 
               {/* Progress Bar */}
-              <div className="h-3 rounded-full overflow-hidden bg-slate-700 mb-2">
+              <div className="h-3 rounded-full overflow-hidden bg-slate-800 mb-2">
                 <div
                   className={`h-full transition-all duration-500 ${
                     budget.status === 'exceeded' ? 'bg-red-500' :
-                    budget.status === 'warning' ? 'bg-yellow-500' : 'bg-green-500'
+                    budget.status === 'warning' ? 'bg-yellow-500' : 'bg-emerald-500'
                   }`}
                   style={{ width: `${Math.min(budget.percentage, 100)}%` }}
                 />
@@ -602,7 +603,7 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
                 <span className="text-slate-400">
                   Terpakai: <span className={
                     budget.status === 'exceeded' ? 'text-red-400' :
-                    budget.status === 'warning' ? 'text-yellow-400' : 'text-green-400'
+                    budget.status === 'warning' ? 'text-yellow-400' : 'text-emerald-400'
                   }>{formatCurrency(budget.spent)}</span>
                 </span>
                 <span className="text-slate-400">
@@ -611,7 +612,7 @@ function BudgetManager({ budgets, onUpdate, expenses }: {
               </div>
               
               {budget.remaining >= 0 ? (
-                <p className="text-xs text-green-400 mt-1">
+                <p className="text-xs text-emerald-400 mt-1">
                   Sisa: {formatCurrency(budget.remaining)} ({(100 - budget.percentage).toFixed(1)}%)
                 </p>
               ) : (
@@ -663,31 +664,32 @@ function MonthlySummary({ transactions }: { transactions: Transaction[] }) {
   }, [monthlySummary]);
 
   return (
-    <div className="bg-slate-700 rounded-xl p-6">
+    <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
       <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-        📅 Ringkasan Bulanan
+        <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">📅</span>
+        Ringkasan Bulanan
       </h3>
 
       {monthlySummary.length === 0 ? (
-        <div className="text-center py-8 text-slate-400">
+        <div className="text-center py-8 text-slate-500">
           <p className="text-4xl mb-2">📅</p>
           <p>Belum ada data bulanan</p>
         </div>
       ) : (
         <div className="space-y-4">
           {monthlySummary.map((month, idx) => (
-            <div key={idx} className="bg-slate-800 rounded-lg p-4">
+            <div key={idx} className="bg-slate-900/50 rounded-lg p-4 border border-slate-700/50">
               <p className="text-white font-medium mb-3">{month.month}</p>
               
               {/* Income Bar */}
               <div className="mb-2">
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-green-400">Pemasukan</span>
-                  <span className="text-green-400">{formatCurrency(month.income)}</span>
+                  <span className="text-emerald-400">Pemasukan</span>
+                  <span className="text-emerald-400">{formatCurrency(month.income)}</span>
                 </div>
-                <div className="h-2 rounded-full overflow-hidden bg-slate-700">
+                <div className="h-2 rounded-full overflow-hidden bg-slate-800">
                   <div
-                    className="h-full bg-green-500 transition-all duration-500"
+                    className="h-full bg-emerald-500 transition-all duration-500"
                     style={{ width: `${(month.income / maxValue) * 100}%` }}
                   />
                 </div>
@@ -699,7 +701,7 @@ function MonthlySummary({ transactions }: { transactions: Transaction[] }) {
                   <span className="text-red-400">Pengeluaran</span>
                   <span className="text-red-400">{formatCurrency(month.expense)}</span>
                 </div>
-                <div className="h-2 rounded-full overflow-hidden bg-slate-700">
+                <div className="h-2 rounded-full overflow-hidden bg-slate-800">
                   <div
                     className="h-full bg-red-500 transition-all duration-500"
                     style={{ width: `${(month.expense / maxValue) * 100}%` }}
@@ -810,31 +812,31 @@ export default function KeuanganPage() {
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cyan-950 via-sky-950 to-blue-950 flex items-center justify-center">
-        <div className="text-cyan-100 text-xl">Memuat data...</div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+        <div className="text-white text-xl">Memuat data...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-950 via-sky-950 to-blue-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Decorative background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 right-1/4 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
       </div>
       
       {/* Header */}
-      <header className="bg-cyan-900/40 backdrop-blur-md border-b border-cyan-500/20 sticky top-0 z-50">
+      <header className="bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-cyan-100 hover:text-cyan-300 transition flex items-center gap-2 group">
+          <Link href="/" className="text-slate-300 hover:text-white transition flex items-center gap-2 group">
             <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Back to Portfolio
           </Link>
-          <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-200 to-sky-200 bg-clip-text text-transparent flex items-center gap-2">
+          <h1 className="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
             <span className="text-2xl">💰</span> Manajemen Keuangan
           </h1>
           <div className="w-[140px]" />
@@ -878,8 +880,8 @@ export default function KeuanganPage() {
             onClick={() => setActiveTab('overview')}
             className={`px-6 py-3 rounded-xl font-semibold transition ${
               activeTab === 'overview'
-                ? 'bg-gradient-to-r from-cyan-500 to-sky-500 text-white shadow-lg shadow-cyan-500/25'
-                : 'bg-cyan-900/30 text-cyan-200 hover:bg-cyan-800/40 border border-cyan-500/20'
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
             📊 Overview
@@ -888,8 +890,8 @@ export default function KeuanganPage() {
             onClick={() => setActiveTab('transactions')}
             className={`px-6 py-3 rounded-xl font-semibold transition ${
               activeTab === 'transactions'
-                ? 'bg-gradient-to-r from-cyan-500 to-sky-500 text-white shadow-lg shadow-cyan-500/25'
-                : 'bg-cyan-900/30 text-cyan-200 hover:bg-cyan-800/40 border border-cyan-500/20'
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
             📋 Transaksi
@@ -898,8 +900,8 @@ export default function KeuanganPage() {
             onClick={() => setActiveTab('budget')}
             className={`px-6 py-3 rounded-xl font-semibold transition ${
               activeTab === 'budget'
-                ? 'bg-gradient-to-r from-cyan-500 to-sky-500 text-white shadow-lg shadow-cyan-500/25'
-                : 'bg-cyan-900/30 text-cyan-200 hover:bg-cyan-800/40 border border-cyan-500/20'
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
             💵 Anggaran
@@ -908,8 +910,8 @@ export default function KeuanganPage() {
             onClick={() => setActiveTab('reports')}
             className={`px-6 py-3 rounded-xl font-semibold transition ${
               activeTab === 'reports'
-                ? 'bg-gradient-to-r from-cyan-500 to-sky-500 text-white shadow-lg shadow-cyan-500/25'
-                : 'bg-cyan-900/30 text-cyan-200 hover:bg-cyan-800/40 border border-cyan-500/20'
+                ? 'bg-blue-600 text-white shadow-lg'
+                : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 border border-slate-700/50'
             }`}
           >
             📈 Laporan
@@ -953,41 +955,41 @@ export default function KeuanganPage() {
         )}
 
         {/* Tips Section */}
-        <div className="mt-6 bg-cyan-900/30 backdrop-blur-sm rounded-2xl p-6 border border-cyan-500/20 shadow-xl shadow-cyan-500/5">
-          <h3 className="text-lg font-semibold text-cyan-100 mb-4 flex items-center gap-2">
-            <span className="w-8 h-8 bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg flex items-center justify-center text-sm">💡</span>
+        <div className="mt-6 bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <span className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center text-sm">💡</span>
             Tips Manajemen Keuangan
           </h3>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-cyan-950/50 rounded-xl p-4 border border-cyan-500/20">
+            <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50">
               <p className="text-2xl mb-2">📝</p>
-              <h4 className="text-cyan-100 font-medium mb-1">Catat Setiap Transaksi</h4>
-              <p className="text-sm text-cyan-300/60">Disiplin mencatat membantu memahami pola keuangan Anda</p>
+              <h4 className="text-white font-medium mb-1">Catat Setiap Transaksi</h4>
+              <p className="text-sm text-slate-400">Disiplin mencatat membantu memahami pola keuangan Anda</p>
             </div>
-            <div className="bg-cyan-950/50 rounded-xl p-4 border border-cyan-500/20">
+            <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50">
               <p className="text-2xl mb-2">🎯</p>
-              <h4 className="text-cyan-100 font-medium mb-1">Tetapkan Anggaran</h4>
-              <p className="text-sm text-cyan-300/60">Batasi pengeluaran per kategori untuk kontrol lebih baik</p>
+              <h4 className="text-white font-medium mb-1">Tetapkan Anggaran</h4>
+              <p className="text-sm text-slate-400">Batasi pengeluaran per kategori untuk kontrol lebih baik</p>
             </div>
-            <div className="bg-cyan-950/50 rounded-xl p-4 border border-cyan-500/20">
+            <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50">
               <p className="text-2xl mb-2">💰</p>
-              <h4 className="text-cyan-100 font-medium mb-1">Sisihkan Tabungan</h4>
-              <p className="text-sm text-cyan-300/60">Idealnya 20% dari penghasilan untuk tabungan & investasi</p>
+              <h4 className="text-white font-medium mb-1">Sisihkan Tabungan</h4>
+              <p className="text-sm text-slate-400">Idealnya 20% dari penghasilan untuk tabungan & investasi</p>
             </div>
-            <div className="bg-cyan-950/50 rounded-xl p-4 border border-cyan-500/20">
+            <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50">
               <p className="text-2xl mb-2">📊</p>
-              <h4 className="text-cyan-100 font-medium mb-1">Review Berkala</h4>
-              <p className="text-sm text-cyan-300/60">Evaluasi keuangan setiap bulan untuk perbaikan terus menerus</p>
+              <h4 className="text-white font-medium mb-1">Review Berkala</h4>
+              <p className="text-sm text-slate-400">Evaluasi keuangan setiap bulan untuk perbaikan terus menerus</p>
             </div>
           </div>
         </div>
 
         {/* Info Section */}
-        <div className="mt-6 bg-sky-500/10 border border-sky-400/30 rounded-2xl p-4 backdrop-blur-sm">
-          <h3 className="text-sky-300 font-semibold mb-2 flex items-center gap-2">
+        <div className="mt-6 bg-blue-500/10 border border-blue-500/20 rounded-2xl p-4 backdrop-blur-sm">
+          <h3 className="text-blue-400 font-semibold mb-2 flex items-center gap-2">
             ℹ️ Informasi
           </h3>
-          <p className="text-sky-200/70 text-sm">
+          <p className="text-slate-400 text-sm">
             Data keuangan Anda disimpan secara lokal di browser (localStorage) dan tidak dikirim ke server manapun.
             Data akan tetap tersimpan selama Anda tidak menghapus data browser. Untuk keamanan, disarankan untuk
             melakukan backup data secara berkala.
@@ -996,8 +998,8 @@ export default function KeuanganPage() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-12 py-6 border-t border-cyan-500/20 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 text-center text-cyan-300/60 text-sm">
+      <footer className="mt-12 py-6 border-t border-slate-700/50 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
           <p>Manajemen Keuangan Pribadi - Untuk Penggunaan Personal</p>
           <p className="mt-1">Built with Next.js, TypeScript, and Tailwind CSS</p>
         </div>
