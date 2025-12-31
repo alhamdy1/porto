@@ -15,8 +15,9 @@ const BOARD_DIMENSION = BOARD_SIZE * CELL_SIZE;
 const FP_SCALE = 3; // Scale factor for first person mode
 const FP_CELL_SIZE = CELL_SIZE * FP_SCALE;
 const FP_BOARD_DIMENSION = BOARD_SIZE * FP_CELL_SIZE;
-const WALL_HEIGHT = 4; // Height of row separator walls (zigzag pattern)
-const OUTER_WALL_HEIGHT = 4; // Height of outer walls (taller than player view)
+const WALL_HEIGHT = 1.5; // Height of row separator walls (shortened)
+const OUTER_WALL_HEIGHT = 2; // Height of outer walls (shortened)
+const SNAKE_LADDER_HEIGHT = 3; // Height for snakes and ladders (above walls, like roof decorations)
 
 // Player colors
 const PLAYER_COLORS = ['#eab308', '#ef4444', '#22c55e', '#3b82f6']; // Yellow, Red, Green, Blue
@@ -364,23 +365,25 @@ function Cell3D({
 }
 
 // Snake 3D Component - Cleaner version
-function Snake3D({ start, end, scale = 1 }: { start: number; end: number; scale?: number }) {
+function Snake3D({ start, end, scale = 1, elevated = false }: { start: number; end: number; scale?: number; elevated?: boolean }) {
   const startCoords = getPositionCoords(start, scale);
   const endCoords = getPositionCoords(end, scale);
+  
+  // Elevation offset for first person mode (above walls like roof decoration)
+  const elevationOffset = elevated ? SNAKE_LADDER_HEIGHT : 0;
   
   // Create smooth curved path for snake
   const points = [];
   const segments = 30;
   const dx = endCoords.x - startCoords.x;
   const dz = endCoords.z - startCoords.z;
-  const length = Math.sqrt(dx * dx + dz * dz);
   
   for (let i = 0; i <= segments; i++) {
     const t = i / segments;
     const x = startCoords.x + dx * t;
     const z = startCoords.z + dz * t;
     // Smooth arc with gentle wave
-    const baseHeight = 0.15 * scale;
+    const baseHeight = 0.15 * scale + elevationOffset;
     const arcHeight = Math.sin(t * Math.PI) * 0.3 * scale;
     const waveHeight = Math.sin(t * Math.PI * 3) * 0.05 * scale;
     const y = baseHeight + arcHeight + waveHeight;
@@ -398,16 +401,16 @@ function Snake3D({ start, end, scale = 1 }: { start: number; end: number; scale?
         <meshStandardMaterial color="#dc2626" roughness={0.3} />
       </mesh>
       {/* Snake head */}
-      <mesh position={[startCoords.x, 0.2 * scale, startCoords.z]}>
+      <mesh position={[startCoords.x, 0.2 * scale + elevationOffset, startCoords.z]}>
         <sphereGeometry args={[tubeRadius * 1.5, 16, 16]} />
         <meshStandardMaterial color="#b91c1c" roughness={0.3} />
       </mesh>
       {/* Snake eyes */}
-      <mesh position={[startCoords.x - 0.03 * scale, 0.25 * scale, startCoords.z - 0.05 * scale]}>
+      <mesh position={[startCoords.x - 0.03 * scale, 0.25 * scale + elevationOffset, startCoords.z - 0.05 * scale]}>
         <sphereGeometry args={[tubeRadius * 0.4, 8, 8]} />
         <meshStandardMaterial color="white" />
       </mesh>
-      <mesh position={[startCoords.x + 0.03 * scale, 0.25 * scale, startCoords.z - 0.05 * scale]}>
+      <mesh position={[startCoords.x + 0.03 * scale, 0.25 * scale + elevationOffset, startCoords.z - 0.05 * scale]}>
         <sphereGeometry args={[tubeRadius * 0.4, 8, 8]} />
         <meshStandardMaterial color="white" />
       </mesh>
@@ -416,11 +419,14 @@ function Snake3D({ start, end, scale = 1 }: { start: number; end: number; scale?
 }
 
 // Ladder 3D Component - Height proportional to distance
-const LADDER_HEIGHT_RATIO = 0.3; // Ratio of horizontal distance to ladder height
+const LADDER_HEIGHT_RATIO = 0.25; // Ratio of horizontal distance to ladder height (reduced for better proportions)
 
-function Ladder3D({ start, end, scale = 1 }: { start: number; end: number; scale?: number }) {
+function Ladder3D({ start, end, scale = 1, elevated = false }: { start: number; end: number; scale?: number; elevated?: boolean }) {
   const startCoords = getPositionCoords(start, scale);
   const endCoords = getPositionCoords(end, scale);
+  
+  // Elevation offset for first person mode (above walls like roof decoration)
+  const elevationOffset = elevated ? SNAKE_LADDER_HEIGHT : 0;
   
   const dx = endCoords.x - startCoords.x;
   const dz = endCoords.z - startCoords.z;
@@ -441,7 +447,7 @@ function Ladder3D({ start, end, scale = 1 }: { start: number; end: number; scale
     const t = i / numRungs;
     const x = startCoords.x + dx * t;
     const z = startCoords.z + dz * t;
-    const y = 0.1 * scale + t * ladderHeight;
+    const y = 0.1 * scale + t * ladderHeight + elevationOffset;
     
     rungs.push(
       <mesh
@@ -459,7 +465,7 @@ function Ladder3D({ start, end, scale = 1 }: { start: number; end: number; scale
   const railLength = Math.sqrt(horizontalLength * horizontalLength + ladderHeight * ladderHeight) * 1.05;
   const railMidX = (startCoords.x + endCoords.x) / 2;
   const railMidZ = (startCoords.z + endCoords.z) / 2;
-  const railMidY = 0.1 * scale + ladderHeight / 2;
+  const railMidY = 0.1 * scale + ladderHeight / 2 + elevationOffset;
   
   // Calculate tilt angle based on height and distance
   const tiltAngle = Math.atan2(ladderHeight, horizontalLength);
@@ -548,7 +554,7 @@ function Board3D({
   );
 }
 
-// First Person Cell 3D Component with walls only at row separators (zigzag pattern)
+// First Person Cell 3D Component with walls between rows (except at zigzag turns)
 function FPCell3D({ 
   position, 
   playerIndices,
@@ -562,11 +568,15 @@ function FPCell3D({
   const color = getBoardColor(position);
   const meshRefs = useRef<(THREE.Mesh | null)[]>([]);
   
+  // Smaller player size to match number size
+  const PLAYER_SIZE = 0.25; // Reduced from 0.4 to be more proportional to numbers
+  const PLAYER_HEIGHT = 0.3; // Reduced height
+  
   useFrame((state) => {
     playerIndices.forEach((playerIdx, i) => {
       const mesh = meshRefs.current[i];
       if (mesh && playerIdx === currentPlayerIndex) {
-        mesh.position.y = 0.6 + Math.sin(state.clock.elapsedTime * 3) * 0.15;
+        mesh.position.y = PLAYER_HEIGHT + Math.sin(state.clock.elapsedTime * 3) * 0.1;
       }
     });
   });
@@ -575,10 +585,10 @@ function FPCell3D({
   const getPlayerOffset = (idx: number, total: number) => {
     if (total === 1) return { x: 0, z: 0 };
     const offsets = [
-      { x: -0.6, z: -0.6 },
-      { x: 0.6, z: -0.6 },
-      { x: -0.6, z: 0.6 },
-      { x: 0.6, z: 0.6 }
+      { x: -0.4, z: -0.4 },
+      { x: 0.4, z: -0.4 },
+      { x: -0.4, z: 0.4 },
+      { x: 0.4, z: 0.4 }
     ];
     return offsets[idx];
   };
@@ -588,25 +598,25 @@ function FPCell3D({
   const col = (position - 1) % BOARD_SIZE;
   const actualCol = row % 2 === 0 ? col : BOARD_SIZE - 1 - col;
   
-  // Zigzag pattern wall logic:
-  // In snake and ladder, the path goes in a zigzag. Row separators are where the path turns.
-  // - For even rows (0, 2, 4...), path goes left to right, wall at right end (last column)
-  // - For odd rows (1, 3, 5...), path goes right to left, wall at left end (first column)
-  // We also need walls between rows (north walls when moving to next row)
+  // Wall logic for row separators:
+  // Walls should be placed between rows, EXCEPT at the zigzag turn points
+  // - For even rows (0, 2, 4...), path goes left to right (col 0 -> 9), turn at col 9
+  // - For odd rows (1, 3, 5...), path goes right to left (col 9 -> 0), turn at col 0
+  // Row separator should NOT be at the turn point (e.g., between 10 and 11)
   
-  // Show wall at the end of each row (where zigzag turns)
   const isEvenRow = row % 2 === 0;
   const isLastColumn = actualCol === BOARD_SIZE - 1;
   const isFirstColumn = actualCol === 0;
-  const showTurnWall = (isEvenRow && isLastColumn) || (!isEvenRow && isFirstColumn);
+  const isTurnPoint = (isEvenRow && isLastColumn) || (!isEvenRow && isFirstColumn);
   
-  // Show wall between rows at the turning point
-  const showRowSeparator = row < BOARD_SIZE - 1;
+  // Show row separator wall (north wall) if not at turn point and not at top row
+  const showRowSeparator = row < BOARD_SIZE - 1 && !isTurnPoint;
   
   const wallThickness = 0.15;
   const wallColor = '#374151';
   
-  // Calculate wall position offset for side walls at zigzag turns
+  // Side wall at zigzag turn - vertical wall where path turns (outer edge)
+  const showSideWall = isTurnPoint && row < BOARD_SIZE - 1;
   const sideWallOffset = isEvenRow ? FP_CELL_SIZE / 2 : -FP_CELL_SIZE / 2;
   
   return (
@@ -631,8 +641,8 @@ function FPCell3D({
         {position.toString()}
       </Text>
       
-      {/* Row separator walls (zigzag pattern) - only at turn points */}
-      {showTurnWall && showRowSeparator && (
+      {/* Row separator walls - placed between rows, NOT at turn points */}
+      {showRowSeparator && (
         <mesh position={[0, WALL_HEIGHT / 2, FP_CELL_SIZE / 2]}>
           <boxGeometry args={[FP_CELL_SIZE, WALL_HEIGHT, wallThickness]} />
           <meshStandardMaterial color={wallColor} />
@@ -640,23 +650,23 @@ function FPCell3D({
       )}
       
       {/* Side wall at zigzag turn - vertical wall where path turns */}
-      {showTurnWall && row < BOARD_SIZE - 1 && (
+      {showSideWall && (
         <mesh position={[sideWallOffset, WALL_HEIGHT / 2, 0]}>
           <boxGeometry args={[wallThickness, WALL_HEIGHT, FP_CELL_SIZE]} />
           <meshStandardMaterial color={wallColor} />
         </mesh>
       )}
       
-      {/* Players */}
+      {/* Players - smaller size to match numbers */}
       {playerIndices.map((playerIdx, i) => {
         const offset = getPlayerOffset(i, playerIndices.length);
         return (
           <mesh 
             key={playerIdx}
             ref={el => { meshRefs.current[i] = el; }}
-            position={[offset.x, 0.6, offset.z]}
+            position={[offset.x, PLAYER_HEIGHT, offset.z]}
           >
-            <sphereGeometry args={[0.4, 32, 32]} />
+            <sphereGeometry args={[PLAYER_SIZE, 32, 32]} />
             <meshStandardMaterial 
               color={PLAYER_COLORS[playerIdx]} 
               emissive={PLAYER_COLORS[playerIdx]} 
@@ -748,12 +758,12 @@ function FPBoard3D({
       
       {/* Snakes */}
       {Object.entries(SNAKES).map(([start, end]) => (
-        <Snake3D key={`snake-${start}`} start={parseInt(start)} end={end} scale={FP_SCALE} />
+        <Snake3D key={`snake-${start}`} start={parseInt(start)} end={end} scale={FP_SCALE} elevated={true} />
       ))}
       
       {/* Ladders */}
       {Object.entries(LADDERS).map(([start, end]) => (
-        <Ladder3D key={`ladder-${start}`} start={parseInt(start)} end={end} scale={FP_SCALE} />
+        <Ladder3D key={`ladder-${start}`} start={parseInt(start)} end={end} scale={FP_SCALE} elevated={true} />
       ))}
     </group>
   );
