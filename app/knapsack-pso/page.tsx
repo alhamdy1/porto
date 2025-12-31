@@ -344,16 +344,16 @@ export default function KnapsackPSOPage() {
             <svg className="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Back to Portfolio
+            Kembali ke Portfolio
           </Link>
           <h1 className="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
-            <span className="text-2xl">🎒</span> Knapsack Problem - PSO Solver
+            <span className="text-2xl">🎒</span> Masalah Knapsack - Solver PSO
           </h1>
           <button
             onClick={resetToDefault}
             className="px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 text-slate-300 rounded-xl transition text-sm border border-slate-700/50"
           >
-            Reset Items
+            Reset Item
           </button>
         </div>
       </header>
@@ -364,17 +364,17 @@ export default function KnapsackPSOPage() {
         <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-slate-700/50 shadow-xl">
           <h2 className="text-xl font-semibold text-slate-300 mb-3 flex items-center gap-2">
             <span className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">📚</span>
-            About This Project
+            Tentang Proyek Ini
           </h2>
           <p className="text-slate-300 mb-3">
-            The <strong className="text-slate-300">0/1 Knapsack Problem</strong> is a classic combinatorial optimization problem. 
-            Given a set of items with weights and values, the goal is to determine which items to include 
-            in a knapsack of limited capacity to maximize the total value.
+            <strong className="text-slate-300">Masalah Knapsack 0/1</strong> adalah masalah optimisasi kombinatorial klasik. 
+            Diberikan sekumpulan item dengan berat dan nilai, tujuannya adalah menentukan item mana yang harus dimasukkan 
+            ke dalam knapsack dengan kapasitas terbatas untuk memaksimalkan total nilai.
           </p>
           <p className="text-slate-300">
-            <strong className="text-slate-300">Particle Swarm Optimization (PSO)</strong> is a metaheuristic algorithm inspired by 
-            the social behavior of birds flocking or fish schooling. Particles &ldquo;fly&rdquo; through the solution 
-            space, guided by their own best-known position and the swarm&rsquo;s best-known position.
+            <strong className="text-slate-300">Particle Swarm Optimization (PSO)</strong> adalah algoritma metaheuristik yang terinspirasi dari 
+            perilaku sosial burung yang bergerak berkelompok atau ikan yang bergerak bersama. Partikel &ldquo;terbang&rdquo; melalui ruang 
+            solusi, dipandu oleh posisi terbaik yang diketahui sendiri dan posisi terbaik yang diketahui kelompok.
           </p>
         </div>
         
@@ -386,11 +386,11 @@ export default function KnapsackPSOPage() {
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold text-slate-300 flex items-center gap-2">
                   <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">📦</span>
-                  Items ({items.length})
+                  Item ({items.length})
                 </h2>
                 <div className="text-sm text-slate-400">
-                  Total Weight: {totalStats.totalWeight.toFixed(1)} kg | 
-                  Total Value: ${totalStats.totalValue.toFixed(0)}
+                  Total Berat: {totalStats.totalWeight.toFixed(1)} kg | 
+                  Total Nilai: ${totalStats.totalValue.toFixed(0)}
                 </div>
               </div>
               
@@ -398,14 +398,14 @@ export default function KnapsackPSOPage() {
               <div className="grid grid-cols-4 gap-2 mb-4">
                 <input
                   type="text"
-                  placeholder="Item name"
+                  placeholder="Nama item"
                   value={newItem.name}
                   onChange={(e) => setNewItem(prev => ({ ...prev, name: e.target.value }))}
                   className="px-3 py-2 bg-slate-900/50 border border-slate-700/50 rounded-xl text-slate-300 placeholder-slate-500 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
                 <input
                   type="number"
-                  placeholder="Weight (kg)"
+                  placeholder="Berat (kg)"
                   value={newItem.weight}
                   onChange={(e) => setNewItem(prev => ({ ...prev, weight: e.target.value }))}
                   className="px-3 py-2 bg-slate-900/50 border border-slate-700/50 rounded-xl text-slate-300 placeholder-slate-500 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -414,7 +414,7 @@ export default function KnapsackPSOPage() {
                 />
                 <input
                   type="number"
-                  placeholder="Value ($)"
+                  placeholder="Nilai ($)"
                   value={newItem.value}
                   onChange={(e) => setNewItem(prev => ({ ...prev, value: e.target.value }))}
                   className="px-3 py-2 bg-slate-900/50 border border-slate-700/50 rounded-xl text-slate-300 placeholder-slate-500 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -424,7 +424,7 @@ export default function KnapsackPSOPage() {
                   onClick={handleAddItem}
                   className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition text-sm font-medium shadow-lg shadow-lg"
                 >
-                  Add Item
+                  Tambah Item
                 </button>
               </div>
               
@@ -434,12 +434,12 @@ export default function KnapsackPSOPage() {
                   <thead>
                     <tr className="text-slate-400 border-b border-slate-700/50">
                       <th className="py-2 text-left">#</th>
-                      <th className="py-2 text-left">Name</th>
-                      <th className="py-2 text-right">Weight (kg)</th>
-                      <th className="py-2 text-right">Value ($)</th>
-                      <th className="py-2 text-right">Ratio ($/kg)</th>
-                      <th className="py-2 text-center">Selected</th>
-                      <th className="py-2 text-center">Action</th>
+                      <th className="py-2 text-left">Nama</th>
+                      <th className="py-2 text-right">Berat (kg)</th>
+                      <th className="py-2 text-right">Nilai ($)</th>
+                      <th className="py-2 text-right">Rasio ($/kg)</th>
+                      <th className="py-2 text-center">Dipilih</th>
+                      <th className="py-2 text-center">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -487,27 +487,27 @@ export default function KnapsackPSOPage() {
               <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
                 <h2 className="text-lg font-semibold text-slate-300 mb-4 flex items-center gap-2">
                   <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">📊</span>
-                  Optimization Results
+                  Hasil Optimisasi
                 </h2>
                 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Summary */}
                   <div className="space-y-4">
                     <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50">
-                      <h3 className="text-sm text-slate-400 mb-2">Best Solution</h3>
+                      <h3 className="text-sm text-slate-400 mb-2">Solusi Terbaik</h3>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <p className="text-2xl font-bold text-emerald-400">${result.totalValue.toFixed(0)}</p>
-                          <p className="text-xs text-slate-400/60">Total Value</p>
+                          <p className="text-xs text-slate-400/60">Total Nilai</p>
                         </div>
                         <div>
                           <p className="text-2xl font-bold text-blue-400">{result.totalWeight.toFixed(2)} kg</p>
-                          <p className="text-xs text-slate-400/60">Total Weight</p>
+                          <p className="text-xs text-slate-400/60">Total Berat</p>
                         </div>
                       </div>
                       <div className="mt-3">
                         <div className="flex justify-between text-xs text-slate-400/60 mb-1">
-                          <span>Capacity Used</span>
+                          <span>Kapasitas Terpakai</span>
                           <span>{((result.totalWeight / capacity) * 100).toFixed(1)}%</span>
                         </div>
                         <div className="w-full bg-slate-900/50 rounded-full h-2">
@@ -520,7 +520,7 @@ export default function KnapsackPSOPage() {
                     </div>
                     
                     <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700/50">
-                      <h3 className="text-sm text-slate-400 mb-2">Selected Items ({result.selectedItems.length})</h3>
+                      <h3 className="text-sm text-slate-400 mb-2">Item Terpilih ({result.selectedItems.length})</h3>
                       <div className="space-y-1">
                         {result.selectedItems.map(item => (
                           <div key={item.id} className="flex justify-between text-sm">
@@ -534,7 +534,7 @@ export default function KnapsackPSOPage() {
                   
                   {/* Convergence Chart */}
                   <div>
-                    <h3 className="text-sm text-slate-400 mb-2">Convergence History</h3>
+                    <h3 className="text-sm text-slate-400 mb-2">Riwayat Konvergensi</h3>
                     <ConvergenceChart data={result.convergenceHistory} />
                   </div>
                 </div>
@@ -548,11 +548,11 @@ export default function KnapsackPSOPage() {
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
               <h2 className="text-lg font-semibold text-slate-300 mb-4 flex items-center gap-2">
                 <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">🎒</span>
-                Knapsack Capacity
+                Kapasitas Knapsack
               </h2>
               <div>
                 <label className="block text-sm text-slate-300 mb-2">
-                  Capacity (kg): {capacity}
+                  Kapasitas (kg): {capacity}
                 </label>
                 <input
                   type="range"
@@ -574,14 +574,14 @@ export default function KnapsackPSOPage() {
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
               <h2 className="text-lg font-semibold text-slate-300 mb-4 flex items-center gap-2">
                 <span className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center text-sm">⚙️</span>
-                PSO Parameters
+                Parameter PSO
               </h2>
               
               <div className="space-y-4">
                 {/* Number of Particles */}
                 <div>
                   <label className="block text-sm text-slate-300 mb-2">
-                    Particles: {psoParams.numParticles}
+                    Partikel: {psoParams.numParticles}
                   </label>
                   <input
                     type="range"
@@ -600,7 +600,7 @@ export default function KnapsackPSOPage() {
                 {/* Max Iterations */}
                 <div>
                   <label className="block text-sm text-slate-300 mb-2">
-                    Iterations: {psoParams.maxIterations}
+                    Iterasi: {psoParams.maxIterations}
                   </label>
                   <input
                     type="range"
@@ -619,7 +619,7 @@ export default function KnapsackPSOPage() {
                 {/* Inertia Weight */}
                 <div>
                   <label className="block text-sm text-slate-300 mb-2">
-                    Inertia (w): {psoParams.w.toFixed(2)}
+                    Inersia (w): {psoParams.w.toFixed(2)}
                   </label>
                   <input
                     type="range"
@@ -638,7 +638,7 @@ export default function KnapsackPSOPage() {
                 {/* Cognitive Coefficient */}
                 <div>
                   <label className="block text-sm text-slate-300 mb-2">
-                    Cognitive (c1): {psoParams.c1.toFixed(2)}
+                    Kognitif (c1): {psoParams.c1.toFixed(2)}
                   </label>
                   <input
                     type="range"
@@ -657,7 +657,7 @@ export default function KnapsackPSOPage() {
                 {/* Social Coefficient */}
                 <div>
                   <label className="block text-sm text-slate-300 mb-2">
-                    Social (c2): {psoParams.c2.toFixed(2)}
+                    Sosial (c2): {psoParams.c2.toFixed(2)}
                   </label>
                   <input
                     type="range"
@@ -676,9 +676,9 @@ export default function KnapsackPSOPage() {
               
               {/* Parameter Info */}
               <div className="mt-4 p-3 bg-slate-900/50 rounded-xl text-xs text-slate-400 border border-slate-700/50">
-                <p><strong className="text-slate-300">w:</strong> Controls exploration vs exploitation</p>
-                <p><strong className="text-slate-300">c1:</strong> How much to trust personal best</p>
-                <p><strong className="text-slate-300">c2:</strong> How much to trust global best</p>
+                <p><strong className="text-slate-300">w:</strong> Mengontrol eksplorasi vs eksploitasi</p>
+                <p><strong className="text-slate-300">c1:</strong> Seberapa besar mempercayai posisi terbaik pribadi</p>
+                <p><strong className="text-slate-300">c2:</strong> Seberapa besar mempercayai posisi terbaik global</p>
               </div>
             </div>
             
@@ -700,10 +700,10 @@ export default function KnapsackPSOPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  Optimizing...
+                  Mengoptimasi...
                 </span>
               ) : (
-                '🚀 Run PSO Optimization'
+                '🚀 Jalankan Optimisasi PSO'
               )}
             </button>
             
@@ -711,15 +711,15 @@ export default function KnapsackPSOPage() {
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
               <h2 className="text-lg font-semibold text-slate-300 mb-3 flex items-center gap-2">
                 <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-sm">📖</span>
-                Algorithm
+                Algoritma
               </h2>
               <div className="space-y-2 text-sm text-slate-300">
-                <p>1. Initialize swarm with random positions</p>
-                <p>2. Evaluate fitness (value - penalty)</p>
-                <p>3. Update personal and global best</p>
-                <p>4. Update velocity using PSO equation</p>
-                <p>5. Update position using sigmoid transfer</p>
-                <p>6. Repeat until max iterations</p>
+                <p>1. Inisialisasi kawanan dengan posisi acak</p>
+                <p>2. Evaluasi fitness (nilai - penalti)</p>
+                <p>3. Perbarui posisi terbaik pribadi dan global</p>
+                <p>4. Perbarui kecepatan menggunakan persamaan PSO</p>
+                <p>5. Perbarui posisi menggunakan transfer sigmoid</p>
+                <p>6. Ulangi sampai iterasi maksimum</p>
               </div>
             </div>
           </div>
@@ -729,8 +729,8 @@ export default function KnapsackPSOPage() {
       {/* Footer */}
       <footer className="mt-12 py-6 border-t border-slate-700/50 relative z-10">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-400/60 text-sm">
-          <p>Knapsack Problem Solver using Particle Swarm Optimization (PSO)</p>
-          <p className="mt-1">Built with Next.js, TypeScript, and Tailwind CSS</p>
+          <p>Pemecah Masalah Knapsack menggunakan Particle Swarm Optimization (PSO)</p>
+          <p className="mt-1">Dibangun dengan Next.js, TypeScript, dan Tailwind CSS</p>
         </div>
       </footer>
     </div>
