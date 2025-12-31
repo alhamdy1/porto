@@ -69,7 +69,7 @@ function formatDate(dateStr: string): string {
 }
 
 function generateId(): string {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
 }
 
 function getCategoryInfo(categoryId: string, type: 'income' | 'expense') {
@@ -80,6 +80,10 @@ function getCategoryInfo(categoryId: string, type: 'income' | 'expense') {
 // Local Storage keys
 const STORAGE_KEY = 'keuangan_transactions';
 const BUDGET_STORAGE_KEY = 'keuangan_budgets';
+
+// Chart colors
+const INCOME_CHART_COLORS = ['bg-green-500', 'bg-emerald-500', 'bg-teal-500', 'bg-cyan-500', 'bg-lime-500', 'bg-green-400'];
+const EXPENSE_CHART_COLORS = ['bg-red-500', 'bg-orange-500', 'bg-amber-500', 'bg-yellow-500', 'bg-rose-500', 'bg-pink-500', 'bg-fuchsia-500', 'bg-purple-500', 'bg-red-400'];
 
 // Summary Card Component
 function SummaryCard({ title, amount, icon, color, subtitle }: {
@@ -381,9 +385,7 @@ function CategoryStats({ transactions, type }: { transactions: Transaction[]; ty
     return { total, categoryTotals };
   }, [transactions, type]);
 
-  const colors = type === 'income'
-    ? ['bg-green-500', 'bg-emerald-500', 'bg-teal-500', 'bg-cyan-500', 'bg-lime-500', 'bg-green-400']
-    : ['bg-red-500', 'bg-orange-500', 'bg-amber-500', 'bg-yellow-500', 'bg-rose-500', 'bg-pink-500', 'bg-fuchsia-500', 'bg-purple-500', 'bg-red-400'];
+  const colors = type === 'income' ? INCOME_CHART_COLORS : EXPENSE_CHART_COLORS;
 
   return (
     <div className="bg-slate-700 rounded-xl p-6">
@@ -736,8 +738,10 @@ export default function KeuanganPage() {
         try {
           const parsed = JSON.parse(savedTransactions);
           setTransactions(parsed);
-        } catch {
-          // Ignore parse errors
+        } catch (error) {
+          console.warn('Failed to parse saved transactions from localStorage:', error);
+          // Clear corrupted data
+          localStorage.removeItem(STORAGE_KEY);
         }
       }
       
@@ -745,8 +749,10 @@ export default function KeuanganPage() {
         try {
           const parsed = JSON.parse(savedBudgets);
           setBudgets(parsed);
-        } catch {
-          // Ignore parse errors
+        } catch (error) {
+          console.warn('Failed to parse saved budgets from localStorage:', error);
+          // Clear corrupted data
+          localStorage.removeItem(BUDGET_STORAGE_KEY);
         }
       }
       
